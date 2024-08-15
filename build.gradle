@@ -1,0 +1,157 @@
+buildscript {
+    dependencies {
+        classpath 'mysql:mysql-connector-java:8.0.27'
+    }
+}
+
+plugins {
+    id 'java'
+    id 'groovy'
+    id 'org.springframework.boot' version '2.7.9'
+    id 'io.spring.dependency-management' version '1.0.15.RELEASE'
+    id "com.diffplug.spotless" version '6.25.0'
+    id "org.flywaydb.flyway" version "8.2.0"
+    id 'jacoco'
+    id 'jacoco-report-aggregation'
+}
+
+flyway {
+    table = 'flyway_shecma_history_boot2_hexagonal'
+    locations = ["filesystem:.flyway/${project.properties['flyway-vendor']}"]
+    baselineOnMigrate = true
+    baselineVersion = '0'
+    configFiles = [".flyway/config/${project.properties['flyway-profile']}.conf"]
+}
+
+apply from: rootProject.file('gradle/install-git-hooks.gradle')
+
+repositories {
+    mavenCentral()
+}
+
+subprojects {
+    apply plugin: 'java'
+    apply plugin: 'groovy'
+    apply plugin: 'org.springframework.boot'
+    apply plugin: 'io.spring.dependency-management'
+    apply plugin: "com.diffplug.spotless"
+    apply plugin: 'jacoco'
+
+    java {
+        sourceCompatibility = '17'
+    }
+
+    configurations {
+        compileOnly {
+            extendsFrom annotationProcessor
+        }
+        all {
+            resolutionStrategy {
+                // cache dynamic versions for 3 minutes
+                cacheDynamicVersionsFor 3 * 60, 'seconds'
+                // don't cache changing modules at all
+                cacheChangingModulesFor 3 * 60, 'seconds'
+            }
+        }
+    }
+
+    repositories {
+        mavenCentral()
+    }
+
+    dependencies {
+        implementation 'io.swagger.core.v3:swagger-annotations:2.2.22'
+        compileOnly 'org.projectlombok:lombok'
+        annotationProcessor 'org.projectlombok:lombok'
+        testCompileOnly 'org.projectlombok:lombok'
+        testAnnotationProcessor 'org.projectlombok:lombok'
+        testImplementation 'org.springframework.boot:spring-boot-starter-test'
+        testImplementation 'org.springframework.security:spring-security-test'
+        testImplementation 'com.fasterxml.jackson.core:jackson-databind:2.13.5'
+        testImplementation "org.spockframework:spock-core:2.4-M1-groovy-4.0"
+        testImplementation "org.spockframework:spock-spring:2.4-M1-groovy-4.0"
+        testImplementation "org.apache.groovy:groovy:4.0.11"
+        testImplementation "org.apache.groovy:groovy-json:4.0.11"
+        testImplementation "com.squareup.okhttp3:okhttp:4.9.3"
+        testImplementation "com.squareup.okhttp3:mockwebserver:4.12.0"
+    }
+
+    spotless {
+        format 'misc', {
+            target '*.gradle', '*.md', '.gitignore'
+
+            trimTrailingWhitespace()
+            indentWithSpaces(2)
+            endWithNewline()
+        }
+        java {
+            importOrder()
+            removeUnusedImports()
+            indentWithSpaces(2)
+            googleJavaFormat()
+            formatAnnotations()
+        }
+
+        groovy {
+            importOrder()
+            excludeJava()
+        }
+    }
+
+    jacoco {
+        toolVersion = '0.8.8'
+    }
+
+    test {
+        useJUnitPlatform()
+
+        finalizedBy 'jacocoTestReport'
+    }
+
+    jacocoTestReport {
+        dependsOn test
+
+        reports {
+            xml.enabled true
+            html.enabled true
+        }
+
+        finalizedBy 'jacocoTestCoverageVerification'
+    }
+
+    afterEvaluate { subproject ->
+        if (subproject.hasProperty('test')) {
+            //noinspection GrUnresolvedAccess
+            rootProject.testReport.reportOn subproject.test
+            rootProject.dependencies {
+                //noinspection GrUnresolvedAccess
+                jacocoAggregation subproject
+            }
+        }
+    }
+}
+
+bootJar {
+    enabled = false
+}
+
+jar {
+    enabled = true
+}
+
+tasks.register('testReport', TestReport) {
+    destinationDirectory = file("$buildDir/reports/tests/test")
+}
+
+tasks.register('printProjectDirs') {
+    doLast {
+        subprojects.forEach { println(rootProject.projectDir.relativePath(it.projectDir)) }
+    }
+}
+
+test {
+    useJUnitPlatform()
+    exclude '**/*'
+    //noinspection GrUnresolvedAccess
+    finalizedBy jacocoTestReport, testCodeCoverageReport, testReport
+}

@@ -1,0 +1,88 @@
+spring:
+  profiles:
+    active: default
+    group:
+      default: api-doc, core, embedded-redis
+      local: api-doc, core
+  h2:
+    console:
+      enabled: false
+  jpa:
+    database: mysql
+    generate-ddl: false
+    hibernate:
+      ddl-auto: validate
+    properties:
+      hibernate:
+        format_sql: true
+        database-platform: org.hibernate.dialect.MySQL8Dialect
+        dialect: org.hibernate.dialect.MySQL8Dialect
+        hibernate:
+          connection:
+            characterEncoding: utf-8
+            charSet: utf-8
+            useUnicode: true
+  jackson:
+    time-zone: "UTC"
+  messages:
+    basename: boot2-hexagonal-messages
+    encoding: UTF-8
+
+management:
+  endpoint:
+    health:
+      show-details: always
+  health:
+    db:
+      enabled: true
+    diskspace:
+      enabled: false
+    ping:
+      enabled: false
+
+springdoc:
+  api-docs:
+    enabled: false
+  swagger-ui:
+    enabled: false
+
+logging:
+  level:
+    root: info
+  charset:
+    console: UTF-8
+  pattern:
+    dateformat: yyyy-MM-dd'T'HH:mm:ss.SSS
+
+server:
+  error:
+    include-message: always
+    include-stacktrace: never
+    include-exception: false
+    include-binding-errors: never
+
+web:
+  cors:
+    allowed-methods:
+      - "*"
+    allowed-headers:
+      - Authorization
+      - Content-Type
+      - Content-Length
+      - Accept-Language
+    max-age: 86400
+
+---
+spring:
+  config:
+    activate:
+      on-profile: "api-doc"
+
+springdoc:
+  packages-to-scan: com.boot2.hexagonal.server.controller
+  default-consumes-media-type: application/json;charset=UTF-8
+  default-produces-media-type: application/json;charset=UTF-8
+  api-docs:
+    path: /api-docs/json
+    enabled: true
+  show-actuator: true

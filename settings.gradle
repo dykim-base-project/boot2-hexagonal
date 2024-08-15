@@ -1,0 +1,6 @@
+rootProject.name = 'boot2-hexagonal'
+
+include 'server'
+include 'api'
+include 'core'
+

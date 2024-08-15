@@ -1,0 +1,27 @@
+spring:
+  devtools:
+    livereload:
+      enabled: true
+  jackson:
+    time-zone: "UTC"
+  datasource:
+    url: jdbc:mysql://localhost:3306/boot2_hexagonal?characterEncoding=utf-8&serverTimeZone=UTC
+    driver-class-name: com.mysql.cj.jdbc.Driver
+    hikari:
+      maximum-pool-size: 2
+      idle-timeout: 30000
+    username: boot2
+    password: p@ssw0rd
+  redis:
+    host: localhost
+    port: 6379
+    password: p@ssw0rd
+
+logging:
+  level:
+    root: debug
+server:
+  error:
+    include-stacktrace: always
+    include-exception: true
+    include-binding-errors: always
