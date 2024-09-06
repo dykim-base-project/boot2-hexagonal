@@ -6,12 +6,10 @@ import javax.validation.Valid;
 import javax.validation.constraints.NotNull;
 import lombok.Builder;
 
-public interface MemberCreateCommand {
+public interface EmailValidateCommand {
 
-  @Builder
+  @Schema(description = "이메일 검증 요청")
+  @Builder(toBuilder = true)
   record Request(
-      @Schema(description = "이메일") @NotNull String email,
-      @Schema(description = "비밀번호") @NotNull String password,
-      @Schema(description = "이름") @NotNull String name,
       @Schema(description = "인증 코드") @NotNull @Valid AuthenticationCode authenticationCode) {}
 }

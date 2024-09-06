@@ -1,0 +1,5 @@
+spring:
+  redis:
+    host: localhost
+    port: ${random.int[10000,65536]}
+    password:

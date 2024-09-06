@@ -1,6 +1,8 @@
 package com.boot2.hexagonal.core;
 
+import com.boot2.hexagonal.api.EmailSystemUseCase;
 import com.boot2.hexagonal.api.MemberUserUseCase;
+import com.boot2.hexagonal.api.command.EmailValidateCommand;
 import com.boot2.hexagonal.api.command.MemberCreateCommand;
 import com.boot2.hexagonal.api.data.MemberData;
 import com.boot2.hexagonal.core.domain.Member;
@@ -19,9 +21,15 @@ public class MemberUserService implements MemberUserUseCase {
   private final MemberRepository repository;
   private final MemberMapper mapper;
 
+  private final EmailSystemUseCase emailSystemUseCase;
+
   @Override
   public MemberData create(MemberCreateCommand.Request request) {
-    // TODO 이메일 인증 여부 확인
+    var emailValidateRequest =
+        EmailValidateCommand.Request.builder()
+            .authenticationCode(request.authenticationCode())
+            .build();
+    emailSystemUseCase.validate(emailValidateRequest);
 
     var messageResponse = Member.create(new MemberCreateMessage.Request(request));
     var savedMember = repository.create(messageResponse.member());
