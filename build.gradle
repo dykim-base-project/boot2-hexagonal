@@ -65,12 +65,12 @@ subprojects {
         implementation 'io.swagger.core.v3:swagger-annotations:2.2.22'
 
         compileOnly 'org.projectlombok:lombok'
+
         annotationProcessor 'org.projectlombok:lombok'
 
         testCompileOnly 'org.projectlombok:lombok'
 
         testAnnotationProcessor 'org.projectlombok:lombok'
-
         testImplementation 'org.springframework.boot:spring-boot-starter-test'
         testImplementation 'org.springframework.security:spring-security-test'
         testImplementation 'com.fasterxml.jackson.core:jackson-databind'
@@ -101,7 +101,6 @@ subprojects {
 
         groovy {
             importOrder()
-            indentWithSpaces(2)
             excludeJava()
         }
     }

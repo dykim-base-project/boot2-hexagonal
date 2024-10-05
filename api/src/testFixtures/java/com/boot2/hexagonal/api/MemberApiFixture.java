@@ -23,4 +23,12 @@ public interface MemberApiFixture {
           .name(COMMAND_CREATE.name())
           .status(MemberStatus.NORMAL)
           .build();
+
+  MemberCreateCommand.Request COMMAND_REQUEST_NORMAL =
+      MemberCreateCommand.Request.builder()
+          .email("normal@email.com")
+          .name("normal")
+          .password("password")
+          .authenticationCode(AuthenticationCode.from("authCode"))
+          .build();
 }

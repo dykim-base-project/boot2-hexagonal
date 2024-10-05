@@ -4,6 +4,7 @@ import com.boot2.hexagonal.api.EmailSystemUseCase
 import com.boot2.hexagonal.api.MemberApiFixture
 import com.boot2.hexagonal.api.MemberUserUseCase
 import com.boot2.hexagonal.api.command.EmailValidateCommand
+import javax.transaction.Transactional
 import org.spockframework.spring.SpringBean
 import org.springframework.beans.factory.annotation.Autowired
 import org.springframework.boot.test.context.SpringBootTest
@@ -11,7 +12,8 @@ import org.springframework.context.annotation.Import
 import org.springframework.test.context.ActiveProfiles
 import spock.lang.Specification
 
-@ActiveProfiles("test")
+@Transactional
+@ActiveProfiles(["test", "embedded-redis"])
 @Import([TestConfig])
 @SpringBootTest(classes = [CoreTestApplication.class])
 class MemberUserServiceSpec extends Specification {

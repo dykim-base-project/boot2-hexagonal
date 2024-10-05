@@ -21,6 +21,7 @@ public class MemberUserService implements MemberUserUseCase {
   private final MemberRepository repository;
   private final MemberMapper mapper;
 
+  // TODO: 이메일 useCase adapter 에서 조립하기
   private final EmailSystemUseCase emailSystemUseCase;
 
   @Override
