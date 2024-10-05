@@ -32,13 +32,6 @@ management:
   endpoint:
     health:
       show-details: always
-  health:
-    db:
-      enabled: true
-    diskspace:
-      enabled: false
-    ping:
-      enabled: false
 
 springdoc:
   api-docs:

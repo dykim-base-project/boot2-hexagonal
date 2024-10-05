@@ -13,6 +13,7 @@ plugins {
     id "org.flywaydb.flyway" version "8.2.0"
     id 'jacoco'
     id 'jacoco-report-aggregation'
+    id 'java-test-fixtures'
 }
 
 flyway {
@@ -36,6 +37,7 @@ subprojects {
     apply plugin: 'io.spring.dependency-management'
     apply plugin: "com.diffplug.spotless"
     apply plugin: 'jacoco'
+    apply plugin: 'java-test-fixtures'
 
     java {
         sourceCompatibility = '17'
@@ -61,19 +63,24 @@ subprojects {
 
     dependencies {
         implementation 'io.swagger.core.v3:swagger-annotations:2.2.22'
+
         compileOnly 'org.projectlombok:lombok'
+
         annotationProcessor 'org.projectlombok:lombok'
+
         testCompileOnly 'org.projectlombok:lombok'
+
         testAnnotationProcessor 'org.projectlombok:lombok'
         testImplementation 'org.springframework.boot:spring-boot-starter-test'
         testImplementation 'org.springframework.security:spring-security-test'
-        testImplementation 'com.fasterxml.jackson.core:jackson-databind:2.13.5'
+        testImplementation 'com.fasterxml.jackson.core:jackson-databind'
         testImplementation "org.spockframework:spock-core:2.4-M1-groovy-4.0"
         testImplementation "org.spockframework:spock-spring:2.4-M1-groovy-4.0"
         testImplementation "org.apache.groovy:groovy:4.0.11"
         testImplementation "org.apache.groovy:groovy-json:4.0.11"
         testImplementation "com.squareup.okhttp3:okhttp:4.9.3"
         testImplementation "com.squareup.okhttp3:mockwebserver:4.12.0"
+        testImplementation(testFixtures(project(':api')))
     }
 
     spotless {
