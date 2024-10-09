@@ -12,5 +12,7 @@ import org.springframework.validation.annotation.Validated;
 public class EmailSystemService implements EmailSystemUseCase {
 
   @Override
-  public void validate(EmailValidateCommand.Request request) { /* TODO document why this method is empty */ }
+  public void validate(EmailValidateCommand.Request request) {
+    /* TODO document why this method is empty */
+  }
 }

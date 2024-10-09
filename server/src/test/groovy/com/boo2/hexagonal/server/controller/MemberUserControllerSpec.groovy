@@ -1,5 +1,9 @@
 package com.boo2.hexagonal.server.controller
 
+import static org.springframework.test.web.servlet.request.MockMvcRequestBuilders.post
+import static org.springframework.test.web.servlet.result.MockMvcResultMatchers.content
+import static org.springframework.test.web.servlet.result.MockMvcResultMatchers.status
+
 import com.boo2.hexagonal.server.TestConfig
 import com.boot2.hexagonal.ServerApplication
 import com.boot2.hexagonal.api.MemberApiFixture
@@ -16,10 +20,6 @@ import org.springframework.test.context.ActiveProfiles
 import org.springframework.test.context.ContextConfiguration
 import org.springframework.test.web.servlet.MockMvc
 import spock.lang.Specification
-
-import static org.springframework.test.web.servlet.request.MockMvcRequestBuilders.post
-import static org.springframework.test.web.servlet.result.MockMvcResultMatchers.content
-import static org.springframework.test.web.servlet.result.MockMvcResultMatchers.status
 
 @ActiveProfiles(["test", "embedded-redis"])
 @Import([TestConfig])
