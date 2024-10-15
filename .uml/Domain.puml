@@ -1,17 +1,34 @@
 @startuml
 
-class "이메일" {
-    발신대상 이메일 주소
-    메시지
+class "email" {
+    발신자(sender)
+    수신자(recipient)
+    제목(subject)
+    내용(content)
+    ---
+    이메일 도메인
+}
+
+
+class "email_send_history" {
+    * id - bigint
+    ---
+    sender varchar(254) email_address 도메인
+    recipient varchar(254) email_address 도메인
+    subject varchar(100)
+    content varchar(255)
+    sent_at datetime(3)
 }
 
 class "회원" {
-    id
+    * id - bigint(JPA H2 대응을 위해 unsigned X)
     ---
-    닉네임
-    이메일 주소
-    이메일 검증 여부 => 검증을 필수로? 가입 로직에 따라 다름.(이메일 가입은 인증 필수, SNS 는 인증 선택)
-    상태 => 회원, 탈퇴
+    name varchar(20)
+    email_address varchar(254)
+    email_validate boolean
+    status varchar(20)
+    created_at datetime(3)
+    updated_at datetime(3)
 }
 
 
