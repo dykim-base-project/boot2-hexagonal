@@ -1,6 +1,8 @@
 package com.boot2.hexagonal.core.adapter.jpa.entity;
 
+import com.boot2.hexagonal.api.data.EmailAddress;
 import com.boot2.hexagonal.api.data.MemberStatus;
+import java.time.ZonedDateTime;
 import javax.persistence.Column;
 import javax.persistence.Entity;
 import javax.persistence.EnumType;
@@ -16,7 +18,7 @@ import org.hibernate.annotations.Comment;
 @Data
 @EqualsAndHashCode(of = "id")
 @Entity
-@Table(name = "members")
+@Table(name = "member")
 public class MemberEntity {
 
   @Comment("id")
@@ -24,9 +26,12 @@ public class MemberEntity {
   @GeneratedValue(strategy = GenerationType.IDENTITY)
   private Long id;
 
-  @Comment("이메일")
-  @Column(unique = true, nullable = false)
-  private String email;
+  @Comment("이메일 주소")
+  @Column(unique = true, nullable = false, length = EmailAddress.MAX_LENGTH)
+  private String emailAddress;
+
+  @Comment("이메일 검증 여부")
+  private boolean emailValidated;
 
   @Comment("비밀번호")
   private String password;
@@ -38,9 +43,11 @@ public class MemberEntity {
   @Enumerated(EnumType.STRING)
   private MemberStatus status;
 
-  @Comment("가입 일시")
-  private long signUpAt;
+  @Comment("생성 일시")
+  @Column(nullable = false, columnDefinition = "datetime(3)")
+  private ZonedDateTime createdAt;
 
   @Comment("수정 일시")
-  private long modifiedAt;
+  @Column(nullable = false, columnDefinition = "datetime(3)")
+  private ZonedDateTime modifiedAt;
 }

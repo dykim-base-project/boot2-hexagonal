@@ -1,14 +1,15 @@
 package com.boot2.hexagonal.core.domain;
 
+import com.boot2.hexagonal.api.data.EmailAddress;
 import com.boot2.hexagonal.api.data.MemberStatus;
 import com.boot2.hexagonal.api.data.id.MemberId;
 import com.boot2.hexagonal.core.domain.message.MemberCreateMessage;
-import java.time.Instant;
-import lombok.AllArgsConstructor;
-import lombok.Builder;
-import lombok.Getter;
-import lombok.NoArgsConstructor;
+import java.time.ZonedDateTime;
+import lombok.*;
+import lombok.extern.slf4j.Slf4j;
 
+@Slf4j
+@ToString
 @Getter
 @Builder
 @NoArgsConstructor
@@ -16,24 +17,28 @@ import lombok.NoArgsConstructor;
 public class Member {
 
   private MemberId id;
-  private String email;
+  private EmailAddress emailAddress;
+  private boolean emailValidated;
   private String password;
   private String name;
   private MemberStatus status;
-  private Long signUpAt;
-  private Long modifiedAt;
+  private ZonedDateTime createdAt;
+  private ZonedDateTime modifiedAt;
 
   public static MemberCreateMessage.Response create(MemberCreateMessage.Request messageRequest) {
     var request = messageRequest.request();
-    var now = Instant.now().toEpochMilli();
-    return new MemberCreateMessage.Response(
-        Member.builder()
-            .email(request.email())
-            .password(request.password())
-            .name(request.name())
-            .status(MemberStatus.NORMAL)
-            .signUpAt(now)
-            .modifiedAt(now)
-            .build());
+    var now = ZonedDateTime.now();
+    var response =
+        new MemberCreateMessage.Response(
+            Member.builder()
+                .emailAddress(request.emailAddress())
+                .password(request.password())
+                .name(request.name())
+                .status(MemberStatus.NORMAL)
+                .createdAt(now)
+                .modifiedAt(now)
+                .build());
+    log.info("member created: {}", response);
+    return response;
   }
 }

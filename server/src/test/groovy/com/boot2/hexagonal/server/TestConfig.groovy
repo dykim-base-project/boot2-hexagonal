@@ -1,4 +1,4 @@
-package com.boo2.hexagonal.server
+package com.boot2.hexagonal.server
 
 import com.boot2.hexagonal.server.config.SecurityConfig
 import com.boot2.hexagonal.server.config.WebProperties

@@ -31,6 +31,7 @@ class MemberUserServiceSpec extends Specification {
 
         when:
         def responseData = memberUserUseCase.create(request)
+        expectData = expectData.toBuilder().createdAt(responseData.createdAt()).modifiedAt(responseData.modifiedAt()).build()
 
         then:
         noExceptionThrown()

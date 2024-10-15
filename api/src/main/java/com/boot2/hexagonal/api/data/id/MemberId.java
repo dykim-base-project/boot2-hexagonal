@@ -19,11 +19,11 @@ public record MemberId(@NotNull @JsonValue Long value) implements Serializable {
   }
 
   public interface Mapper {
-    default Long memberId(MemberId value) {
+    default Long map(MemberId value) {
       return Optional.ofNullable(value).map(MemberId::value).orElse(null);
     }
 
-    default MemberId memberId(Long value) {
+    default MemberId map(Long value) {
       return Optional.ofNullable(value).map(MemberId::from).orElse(null);
     }
   }

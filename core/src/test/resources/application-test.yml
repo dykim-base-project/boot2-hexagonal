@@ -4,3 +4,9 @@ spring:
     #    port: 6380
     port: ${random.int[10000,65536]}
     password:
+
+smtp:
+  host: smtp.naver.com
+  port: 465
+  username: test
+  password: test

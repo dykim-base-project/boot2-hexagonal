@@ -1,14 +1,14 @@
-package com.boo2.hexagonal.server.controller
+package com.boot2.hexagonal.server.controller
 
 import static org.springframework.test.web.servlet.request.MockMvcRequestBuilders.post
 import static org.springframework.test.web.servlet.result.MockMvcResultMatchers.content
 import static org.springframework.test.web.servlet.result.MockMvcResultMatchers.status
 
-import com.boo2.hexagonal.server.TestConfig
 import com.boot2.hexagonal.ServerApplication
 import com.boot2.hexagonal.api.MemberApiFixture
 import com.boot2.hexagonal.api.MemberUserUseCase
 import com.boot2.hexagonal.api.command.MemberCreateCommand
+import com.boot2.hexagonal.server.TestConfig
 import com.boot2.hexagonal.server.controller.member.MemberUserController
 import com.fasterxml.jackson.databind.ObjectMapper
 import org.spockframework.spring.SpringBean
@@ -24,7 +24,6 @@ import spock.lang.Specification
 @ActiveProfiles(["test", "embedded-redis"])
 @Import([TestConfig])
 @WebMvcTest(MemberUserController)
-@ContextConfiguration(classes=[ServerApplication.class])
 class MemberUserControllerSpec extends Specification {
 
     @Autowired

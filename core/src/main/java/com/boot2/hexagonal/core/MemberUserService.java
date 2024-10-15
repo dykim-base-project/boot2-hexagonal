@@ -6,7 +6,7 @@ import com.boot2.hexagonal.api.command.EmailValidateCommand;
 import com.boot2.hexagonal.api.command.MemberCreateCommand;
 import com.boot2.hexagonal.api.data.MemberData;
 import com.boot2.hexagonal.core.domain.Member;
-import com.boot2.hexagonal.core.domain.MemberMapper;
+import com.boot2.hexagonal.core.domain.mapper.MemberMapper;
 import com.boot2.hexagonal.core.domain.message.MemberCreateMessage;
 import com.boot2.hexagonal.core.domain.port.MemberRepository;
 import lombok.RequiredArgsConstructor;
@@ -21,7 +21,6 @@ public class MemberUserService implements MemberUserUseCase {
   private final MemberRepository repository;
   private final MemberMapper mapper;
 
-  // TODO: 이메일 useCase adapter 에서 조립하기
   private final EmailSystemUseCase emailSystemUseCase;
 
   @Override
