@@ -18,7 +18,7 @@ import org.hibernate.annotations.Comment;
 @Data
 @EqualsAndHashCode(of = "id")
 @Entity
-@Table(name = "member")
+@Table(name = "domain")
 public class MemberEntity {
 
   @Comment("id")

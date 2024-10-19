@@ -3,7 +3,7 @@ package com.boot2.hexagonal.core.domain;
 import com.boot2.hexagonal.api.data.EmailAddress;
 import com.boot2.hexagonal.api.data.MemberStatus;
 import com.boot2.hexagonal.api.data.id.MemberId;
-import com.boot2.hexagonal.core.domain.message.MemberCreateMessage;
+import com.boot2.hexagonal.core.domain.message.MemberMessage;
 import java.time.ZonedDateTime;
 import lombok.*;
 import lombok.extern.slf4j.Slf4j;
@@ -25,11 +25,11 @@ public class Member {
   private ZonedDateTime createdAt;
   private ZonedDateTime modifiedAt;
 
-  public static MemberCreateMessage.Response create(MemberCreateMessage.Request messageRequest) {
+  public static MemberMessage.CreateResponse create(MemberMessage.CreateRequest messageRequest) {
     var request = messageRequest.request();
     var now = ZonedDateTime.now();
     var response =
-        new MemberCreateMessage.Response(
+        new MemberMessage.CreateResponse(
             Member.builder()
                 .emailAddress(request.emailAddress())
                 .password(request.password())
@@ -38,7 +38,7 @@ public class Member {
                 .createdAt(now)
                 .modifiedAt(now)
                 .build());
-    log.info("member created: {}", response);
+    log.info("domain created: {}", response);
     return response;
   }
 }

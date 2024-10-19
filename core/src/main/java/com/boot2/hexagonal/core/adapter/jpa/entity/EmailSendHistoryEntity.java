@@ -20,11 +20,11 @@ public class EmailSendHistoryEntity {
 
   @Comment("발신자")
   @Column(nullable = false, length = EmailAddress.MAX_LENGTH)
-  private String from;
+  private String sender;
 
   @Comment("수신자")
   @Column(nullable = false, length = EmailAddress.MAX_LENGTH)
-  private String to;
+  private String recipient;
 
   @Comment("제목")
   @Column(nullable = false, length = 100)

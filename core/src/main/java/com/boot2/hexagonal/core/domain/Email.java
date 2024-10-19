@@ -2,8 +2,7 @@ package com.boot2.hexagonal.core.domain;
 
 import com.boot2.hexagonal.api.data.AuthenticationCode;
 import com.boot2.hexagonal.api.data.EmailAddress;
-import com.boot2.hexagonal.core.domain.message.EmailSendMessage;
-import com.boot2.hexagonal.core.domain.message.EmailValidateMessage;
+import com.boot2.hexagonal.core.domain.message.EmailMessage;
 import java.time.ZonedDateTime;
 import lombok.*;
 import lombok.extern.slf4j.Slf4j;
@@ -16,33 +15,33 @@ import lombok.extern.slf4j.Slf4j;
 @AllArgsConstructor
 public class Email {
 
-  private EmailAddress from;
-  private EmailAddress to;
+  private EmailAddress sender;
+  private EmailAddress recipient;
   private String subject;
   private String body;
   private ZonedDateTime sentAt;
 
   private AuthenticationCode authenticationCode;
 
-  public static EmailSendMessage.Response send(EmailSendMessage.Request message) {
+  public static EmailMessage.SendResponse send(EmailMessage.SendRequest message) {
     var request = message.request();
     var email =
         Email.builder()
-            .from(request.from())
-            .to(request.to())
+            .sender(request.from())
+            .recipient(request.to())
             .subject(request.subject())
             .body(request.body())
             .sentAt(ZonedDateTime.now())
             .build();
-    var response = new EmailSendMessage.Response(email);
+    var response = new EmailMessage.SendResponse(email);
     log.info("Email sent: {}", response);
     return response;
   }
 
-  public static EmailValidateMessage.Response validate(EmailValidateMessage.Request message) {
+  public static EmailMessage.ValidateResponse validate(EmailMessage.ValidateRequest message) {
     var request = message.request();
     var email = Email.builder().authenticationCode(request.authenticationCode()).build();
-    var response = new EmailValidateMessage.Response(email);
+    var response = new EmailMessage.ValidateResponse(email);
     log.info("Email validated: {}", response);
     return response;
   }

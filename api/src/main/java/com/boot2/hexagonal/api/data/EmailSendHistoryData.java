@@ -9,8 +9,8 @@ import lombok.Builder;
 @Builder
 public record EmailSendHistoryData(
     @Schema(description = "id") EmailSendHistoryId id,
-    @Schema(description = "발신자") EmailAddress from,
-    @Schema(description = "수신자") EmailAddress to,
+    @Schema(description = "발신자") EmailAddress sender,
+    @Schema(description = "수신자") EmailAddress recipient,
     @Schema(description = "제목") String subject,
     @Schema(description = "내용") String body,
     @Schema(description = "발신 일시") ZonedDateTime sentAt) {}

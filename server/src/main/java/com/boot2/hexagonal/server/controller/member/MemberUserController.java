@@ -1,7 +1,7 @@
 package com.boot2.hexagonal.server.controller.member;
 
 import com.boot2.hexagonal.api.MemberUserUseCase;
-import com.boot2.hexagonal.api.command.MemberCreateCommand;
+import com.boot2.hexagonal.api.command.MemberCommand;
 import com.boot2.hexagonal.api.data.MemberData;
 import io.swagger.v3.oas.annotations.Operation;
 import io.swagger.v3.oas.annotations.security.SecurityRequirement;
@@ -25,7 +25,7 @@ public class MemberUserController {
 
   @Operation(summary = "회원 생성", description = "회원을 생성합니다. 이메일 인증 여부를 확인합니다.")
   @PostMapping
-  public MemberData create(@RequestBody MemberCreateCommand.Request request) {
+  public MemberData create(@RequestBody MemberCommand.CreateRequest request) {
     return memberUserUseCase.create(request);
   }
 }

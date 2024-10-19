@@ -7,8 +7,8 @@ import lombok.Builder;
 @Schema(description = "이메일 데이터")
 @Builder
 public record EmailData(
-    @Schema(description = "발신자") EmailAddress from,
-    @Schema(description = "수신자") EmailAddress to,
+    @Schema(description = "발신자") EmailAddress sender,
+    @Schema(description = "수신자") EmailAddress recipient,
     @Schema(description = "제목") String subject,
     @Schema(description = "내용") String body,
     @Schema(description = "발신 일시") ZonedDateTime sentAt) {}

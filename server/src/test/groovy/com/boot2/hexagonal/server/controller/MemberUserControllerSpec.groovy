@@ -4,10 +4,9 @@ import static org.springframework.test.web.servlet.request.MockMvcRequestBuilder
 import static org.springframework.test.web.servlet.result.MockMvcResultMatchers.content
 import static org.springframework.test.web.servlet.result.MockMvcResultMatchers.status
 
-import com.boot2.hexagonal.ServerApplication
 import com.boot2.hexagonal.api.MemberApiFixture
 import com.boot2.hexagonal.api.MemberUserUseCase
-import com.boot2.hexagonal.api.command.MemberCreateCommand
+import com.boot2.hexagonal.api.command.MemberCommand
 import com.boot2.hexagonal.server.TestConfig
 import com.boot2.hexagonal.server.controller.member.MemberUserController
 import com.fasterxml.jackson.databind.ObjectMapper
@@ -17,7 +16,6 @@ import org.springframework.boot.test.autoconfigure.web.servlet.WebMvcTest
 import org.springframework.context.annotation.Import
 import org.springframework.http.MediaType
 import org.springframework.test.context.ActiveProfiles
-import org.springframework.test.context.ContextConfiguration
 import org.springframework.test.web.servlet.MockMvc
 import spock.lang.Specification
 
@@ -39,7 +37,7 @@ class MemberUserControllerSpec extends Specification {
         given:
         def commandRequest = MemberApiFixture.COMMAND_REQUEST_NORMAL
         def responseData = MemberApiFixture.DATA_CREATED_NORMAL
-        memberUserUseCase.create(_ as MemberCreateCommand.Request) >> responseData
+        memberUserUseCase.create(_ as MemberCommand.CreateRequest) >> responseData
 
         expect:
         mvc.perform(post("/user/members")

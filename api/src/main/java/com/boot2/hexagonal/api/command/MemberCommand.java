@@ -8,10 +8,10 @@ import javax.validation.constraints.NotBlank;
 import javax.validation.constraints.NotNull;
 import lombok.Builder;
 
-public interface MemberCreateCommand {
+public interface MemberCommand {
 
   @Builder
-  record Request(
+  record CreateRequest(
       @Schema(description = "이메일 주소") @NotNull @Valid EmailAddress emailAddress,
       @Schema(description = "비밀번호") @NotBlank String password,
       @Schema(description = "이름") @NotBlank String name,

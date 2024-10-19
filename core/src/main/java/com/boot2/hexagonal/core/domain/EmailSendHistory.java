@@ -2,7 +2,7 @@ package com.boot2.hexagonal.core.domain;
 
 import com.boot2.hexagonal.api.data.EmailAddress;
 import com.boot2.hexagonal.api.data.id.EmailSendHistoryId;
-import com.boot2.hexagonal.core.domain.message.EmailSendHistoryCreateMessage;
+import com.boot2.hexagonal.core.domain.message.EmailSendHistoryMessage;
 import java.time.ZonedDateTime;
 import lombok.*;
 import lombok.extern.slf4j.Slf4j;
@@ -17,24 +17,24 @@ import lombok.extern.slf4j.Slf4j;
 public class EmailSendHistory {
 
   private EmailSendHistoryId id;
-  private EmailAddress from;
-  private EmailAddress to;
+  private EmailAddress sender;
+  private EmailAddress recipient;
   private String subject;
   private String body;
   private ZonedDateTime sentAt;
 
-  public static EmailSendHistoryCreateMessage.Response create(
-      EmailSendHistoryCreateMessage.Request message) {
+  public static EmailSendHistoryMessage.CreateResponse create(
+      EmailSendHistoryMessage.CreateRequest message) {
     var request = message.request();
     var emailSendHistory =
         EmailSendHistory.builder()
-            .from(request.from())
-            .to(request.to())
+            .sender(request.sender())
+            .recipient(request.recipient())
             .subject(request.subject())
             .body(request.body())
             .sentAt(request.sentAt())
             .build();
-    var response = new EmailSendHistoryCreateMessage.Response(emailSendHistory);
+    var response = new EmailSendHistoryMessage.CreateResponse(emailSendHistory);
     log.info("Email send history created: {}", response);
     return response;
   }
