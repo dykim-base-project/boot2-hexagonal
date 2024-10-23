@@ -29,4 +29,5 @@ smtp:
   host: smtp.naver.com
   port: 465
   username: idean3885
+  sender: dykimDev3885@gmail.com
   password:

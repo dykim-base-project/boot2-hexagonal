@@ -1,10 +1,10 @@
 package com.boot2.hexagonal.api;
 
-import com.boot2.hexagonal.api.command.MemberCommand;
+import com.boot2.hexagonal.api.commands.MemberCommand;
 import com.boot2.hexagonal.api.data.AuthenticationCode;
 import com.boot2.hexagonal.api.data.EmailAddress;
 import com.boot2.hexagonal.api.data.MemberData;
-import com.boot2.hexagonal.api.data.MemberStatus;
+import com.boot2.hexagonal.api.data.MemberStatusKind;
 import com.boot2.hexagonal.api.data.id.MemberId;
 import java.time.ZonedDateTime;
 
@@ -24,7 +24,7 @@ public interface MemberApiFixture {
           .id(ID_NORMAL)
           .emailAddress(COMMAND_CREATE.emailAddress())
           .name(COMMAND_CREATE.name())
-          .status(MemberStatus.NORMAL)
+          .status(MemberStatusKind.NORMAL)
           .createdAt(NOW)
           .modifiedAt(NOW)
           .build();

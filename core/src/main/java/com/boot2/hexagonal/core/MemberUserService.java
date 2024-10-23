@@ -2,13 +2,13 @@ package com.boot2.hexagonal.core;
 
 import com.boot2.hexagonal.api.EmailSystemUseCase;
 import com.boot2.hexagonal.api.MemberUserUseCase;
-import com.boot2.hexagonal.api.command.EmailCommand;
-import com.boot2.hexagonal.api.command.MemberCommand;
+import com.boot2.hexagonal.api.commands.EmailCommand;
+import com.boot2.hexagonal.api.commands.MemberCommand;
 import com.boot2.hexagonal.api.data.MemberData;
-import com.boot2.hexagonal.core.domain.Member;
-import com.boot2.hexagonal.core.domain.mapper.MemberMapper;
-import com.boot2.hexagonal.core.domain.message.MemberMessage;
-import com.boot2.hexagonal.core.domain.port.MemberRepository;
+import com.boot2.hexagonal.core.domains.Member;
+import com.boot2.hexagonal.core.domains.mappers.MemberMapper;
+import com.boot2.hexagonal.core.domains.messages.MemberMessage;
+import com.boot2.hexagonal.core.domains.ports.MemberRepository;
 import lombok.RequiredArgsConstructor;
 import org.springframework.stereotype.Service;
 import org.springframework.validation.annotation.Validated;
@@ -30,6 +30,6 @@ public class MemberUserService implements MemberUserUseCase {
 
     var messageResponse = Member.create(new MemberMessage.CreateRequest(request));
     var savedMember = repository.create(messageResponse.domain());
-    return mapper.toMemberData(savedMember);
+    return mapper.map(savedMember);
   }
 }

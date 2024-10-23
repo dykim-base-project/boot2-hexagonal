@@ -13,12 +13,16 @@ public record AuthenticationCode(@NotBlank @JsonValue String value) {
     return new AuthenticationCode(value);
   }
 
+  public static AuthenticationCode from(@NonNull Long value) {
+    return new AuthenticationCode(String.valueOf(value));
+  }
+
   public interface Mapper {
-    default String map(AuthenticationCode value) {
+    default String authenticationCode(AuthenticationCode value) {
       return Optional.ofNullable(value).map(AuthenticationCode::value).orElse(null);
     }
 
-    default AuthenticationCode map(String value) {
+    default AuthenticationCode authenticationCode(String value) {
       return Optional.ofNullable(value).map(AuthenticationCode::from).orElse(null);
     }
   }

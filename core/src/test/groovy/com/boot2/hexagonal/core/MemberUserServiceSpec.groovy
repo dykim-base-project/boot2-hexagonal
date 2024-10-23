@@ -3,7 +3,7 @@ package com.boot2.hexagonal.core
 import com.boot2.hexagonal.api.EmailSystemUseCase
 import com.boot2.hexagonal.api.MemberApiFixture
 import com.boot2.hexagonal.api.MemberUserUseCase
-import com.boot2.hexagonal.api.command.EmailCommand
+import com.boot2.hexagonal.api.commands.EmailCommand
 import javax.transaction.Transactional
 import org.spockframework.spring.SpringBean
 import org.springframework.beans.factory.annotation.Autowired

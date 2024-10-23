@@ -1,6 +1,6 @@
 package com.boot2.hexagonal.api;
 
-import com.boot2.hexagonal.api.command.MemberCommand;
+import com.boot2.hexagonal.api.commands.MemberCommand;
 import com.boot2.hexagonal.api.data.MemberData;
 import javax.validation.Valid;
 import javax.validation.constraints.NotNull;
