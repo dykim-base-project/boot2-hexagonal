@@ -1,7 +1,7 @@
 package com.boot2.hexagonal.server.controllers.authentications;
 
 import com.boot2.hexagonal.api.AuthenticationUserUseCase;
-import com.boot2.hexagonal.api.commands.AuthenticationCommand;
+import com.boot2.hexagonal.api.commands.AuthenticationUserCommand;
 import com.boot2.hexagonal.api.data.AuthenticationData;
 import com.boot2.hexagonal.api.data.EmailAddress;
 import io.swagger.v3.oas.annotations.Operation;
@@ -28,7 +28,7 @@ public class AuthenticationUserController {
   @Operation(summary = "인증 번호 발송(이메일)", description = "이메일로 인증 번호를 발송합니다.")
   @GetMapping("/send-code-to-email/{emailAddress}")
   public AuthenticationData sendCodeToEmail(@PathVariable @NotBlank String emailAddress) {
-    var request = new AuthenticationCommand.SendCodeToEmailRequest(EmailAddress.from(emailAddress));
+    var request = new AuthenticationUserCommand.SendCodeToEmailRequest(EmailAddress.from(emailAddress));
     return useCase.sendCodeToEmail(request);
   }
 }

@@ -2,7 +2,8 @@ package com.boot2.hexagonal.core;
 
 import com.boot2.hexagonal.api.AuthenticationUserUseCase;
 import com.boot2.hexagonal.api.EmailSystemUseCase;
-import com.boot2.hexagonal.api.commands.AuthenticationCommand.SendCodeToEmailRequest;
+import com.boot2.hexagonal.api.commands.AuthenticationUserCommand;
+import com.boot2.hexagonal.api.commands.AuthenticationUserCommand.SendCodeToEmailRequest;
 import com.boot2.hexagonal.api.commands.EmailCommand;
 import com.boot2.hexagonal.api.data.AuthenticationData;
 import com.boot2.hexagonal.core.domains.Authentication;
