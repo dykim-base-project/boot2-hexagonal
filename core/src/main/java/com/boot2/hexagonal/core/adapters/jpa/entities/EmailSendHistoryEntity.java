@@ -10,7 +10,8 @@ import org.hibernate.annotations.Comment;
 @Data
 @EqualsAndHashCode(of = "id")
 @Entity
-@Table(name = "emailSendHistoryEntity")
+@Table(name = "email_send_history")
+@org.hibernate.annotations.Table(appliesTo = "email_send_history", comment = "이메일 발신 이력")
 public class EmailSendHistoryEntity {
 
   @Comment("id")

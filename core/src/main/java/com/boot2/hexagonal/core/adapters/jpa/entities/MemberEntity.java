@@ -11,6 +11,7 @@ import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
 import javax.persistence.Table;
+import javax.persistence.UniqueConstraint;
 import lombok.Data;
 import lombok.EqualsAndHashCode;
 import org.hibernate.annotations.Comment;
@@ -18,7 +19,11 @@ import org.hibernate.annotations.Comment;
 @Data
 @EqualsAndHashCode(of = "id")
 @Entity
-@Table(name = "member")
+@Table(
+  name = "member",
+  uniqueConstraints = { @UniqueConstraint(name = "uk__email_address", columnNames = { "email_address" }) }
+)
+@org.hibernate.annotations.Table(appliesTo = "member", comment = "회원")
 public class MemberEntity {
 
   @Comment("id")
@@ -27,7 +32,7 @@ public class MemberEntity {
   private Long id;
 
   @Comment("이메일 주소")
-  @Column(unique = true, nullable = false, length = EmailAddress.MAX_LENGTH)
+  @Column(name = "email_address", nullable = false, length = EmailAddress.MAX_LENGTH)
   private String emailAddress;
 
   @Comment("이메일 검증 여부")
