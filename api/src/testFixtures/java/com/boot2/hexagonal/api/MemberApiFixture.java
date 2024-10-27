@@ -15,7 +15,7 @@ public interface MemberApiFixture {
       MemberCommand.CreateRequest.builder()
           .name("name")
           .emailAddress(EmailAddress.from("request@emailAddress.com"))
-          .authenticationCode(AuthenticationCode.from("test"))
+          .code(AuthenticationCode.from("test"))
           .password("password")
           .build();
 
@@ -34,6 +34,6 @@ public interface MemberApiFixture {
           .emailAddress(EmailAddress.from("normal@emailAddress.com"))
           .name("normal")
           .password("password")
-          .authenticationCode(AuthenticationCode.from("authCode"))
+          .code(AuthenticationCode.from("authCode"))
           .build();
 }

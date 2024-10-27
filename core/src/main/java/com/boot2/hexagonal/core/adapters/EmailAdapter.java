@@ -31,7 +31,4 @@ public class EmailAdapter implements EmailPort {
     mailSender.send(simpleMailMessage);
     return email;
   }
-
-  @Override
-  public void validate(Email email) {}
 }

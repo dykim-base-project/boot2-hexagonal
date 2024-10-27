@@ -1,4 +1,4 @@
-package com.boot2.hexagonal.core.mappers;
+package com.boot2.hexagonal.core.domains.mappers;
 
 import com.boot2.hexagonal.api.data.EmailAddress;
 import com.boot2.hexagonal.api.data.EmailData;

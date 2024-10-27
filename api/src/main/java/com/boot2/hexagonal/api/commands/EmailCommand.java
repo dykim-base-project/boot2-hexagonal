@@ -12,8 +12,8 @@ import lombok.Builder;
 
 public interface EmailCommand {
 
-  @Schema(description = "이메일 전송 요청")
-  @Builder
+  @Schema(description = "전송 요청")
+  @Builder(toBuilder = true)
   record SendRequest(
       @Schema(description = "수신자", requiredMode = REQUIRED) @NotNull @Valid EmailAddress recipient,
       @Schema(description = "제목", requiredMode = REQUIRED) @NotBlank String subject,
@@ -22,5 +22,6 @@ public interface EmailCommand {
   @Schema(description = "이메일 검증 요청")
   @Builder(toBuilder = true)
   record ValidateRequest(
-      @Schema(description = "인증 코드") @NotNull @Valid AuthenticationCode authenticationCode) {}
+      @Schema(description = "이메일 주소") @NotNull @Valid EmailAddress emailAddress,
+      @Schema(description = "인증 코드") @NotNull @Valid AuthenticationCode code) {}
 }

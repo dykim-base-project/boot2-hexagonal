@@ -25,7 +25,11 @@ public class MemberUserService implements MemberUserUseCase {
 
   @Override
   public MemberData create(MemberCommand.CreateRequest request) {
-    var emailValidateRequest = new EmailCommand.ValidateRequest(request.authenticationCode());
+    var emailValidateRequest =
+        EmailCommand.ValidateRequest.builder()
+            .emailAddress(request.emailAddress())
+            .code(request.code())
+            .build();
     emailSystemUseCase.validate(emailValidateRequest);
 
     var messageResponse = Member.create(new MemberMessage.CreateRequest(request));

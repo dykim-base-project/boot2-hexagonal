@@ -1,7 +1,10 @@
 package com.boot2.hexagonal.core.domains.messages;
 
 import com.boot2.hexagonal.api.commands.EmailCommand;
+import com.boot2.hexagonal.api.commands.EmailUserCommand;
+import com.boot2.hexagonal.api.data.AuthenticationData;
 import com.boot2.hexagonal.core.domains.Email;
+import lombok.Builder;
 
 public interface EmailMessage {
 
@@ -9,7 +12,9 @@ public interface EmailMessage {
 
   record SendResponse(Email domain) {}
 
-  record ValidateRequest(EmailCommand.ValidateRequest request) {}
+  @Builder
+  record SendCodeRequest(
+      EmailUserCommand.SendCodeRequest request, AuthenticationData authenticationData) {}
 
-  record ValidateResponse(Email domain) {}
+  record SendCodeResponse(Email domain) {}
 }

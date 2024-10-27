@@ -1,10 +1,12 @@
 package com.boot2.hexagonal.core.domains.ports;
 
+import com.boot2.hexagonal.api.data.id.AuthenticationId;
 import com.boot2.hexagonal.core.domains.Authentication;
+import java.util.Optional;
 
 public interface AuthenticationRepository {
 
-  Authentication create(Authentication authentication);
+  Optional<Authentication> findBy(AuthenticationId id);
 
-  void validate(Authentication authentication);
+  Authentication create(Authentication authentication);
 }

@@ -1,16 +1,19 @@
 package com.boot2.hexagonal.core;
 
+import com.boot2.hexagonal.api.AuthenticationSystemUseCase;
 import com.boot2.hexagonal.api.EmailSystemUseCase;
+import com.boot2.hexagonal.api.commands.AuthenticationSystemCommand;
 import com.boot2.hexagonal.api.commands.EmailCommand;
 import com.boot2.hexagonal.api.commands.EmailSendHistoryCommand;
 import com.boot2.hexagonal.api.data.EmailData;
+import com.boot2.hexagonal.api.data.id.AuthenticationId;
 import com.boot2.hexagonal.core.domains.Email;
 import com.boot2.hexagonal.core.domains.EmailSendHistory;
+import com.boot2.hexagonal.core.domains.mappers.EmailMapper;
 import com.boot2.hexagonal.core.domains.messages.EmailMessage;
 import com.boot2.hexagonal.core.domains.messages.EmailSendHistoryMessage;
 import com.boot2.hexagonal.core.domains.ports.EmailPort;
 import com.boot2.hexagonal.core.domains.ports.EmailSendHistoryRepository;
-import com.boot2.hexagonal.core.mappers.EmailMapper;
 import lombok.RequiredArgsConstructor;
 import org.springframework.stereotype.Service;
 import org.springframework.validation.annotation.Validated;
@@ -24,6 +27,8 @@ public class EmailSystemService implements EmailSystemUseCase {
   private final EmailMapper emailMapper;
 
   private final EmailSendHistoryRepository emailSendHistoryRepository;
+
+  private final AuthenticationSystemUseCase authenticationSystemUseCase;
 
   @Override
   public EmailData send(EmailCommand.SendRequest request) {
@@ -49,8 +54,12 @@ public class EmailSystemService implements EmailSystemUseCase {
 
   @Override
   public void validate(EmailCommand.ValidateRequest request) {
-    var messageResponse = Email.validate(new EmailMessage.ValidateRequest(request));
-    var email = messageResponse.domain();
-    emailPort.validate(email);
+    var authenticationId = AuthenticationId.from(request.emailAddress());
+    var validateRequest =
+        AuthenticationSystemCommand.ValidateRequest.builder()
+            .id(authenticationId)
+            .code(request.code())
+            .build();
+    authenticationSystemUseCase.validate(validateRequest);
   }
 }

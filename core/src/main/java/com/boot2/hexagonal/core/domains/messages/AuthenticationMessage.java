@@ -1,11 +1,15 @@
 package com.boot2.hexagonal.core.domains.messages;
 
-import com.boot2.hexagonal.api.commands.AuthenticationUserCommand;
+import com.boot2.hexagonal.api.commands.AuthenticationSystemCommand;
 import com.boot2.hexagonal.core.domains.Authentication;
 
 public interface AuthenticationMessage {
 
-  record SendCodeToEmailRequest(AuthenticationUserCommand.SendCodeToEmailRequest request) {}
+  record CreateRequest(AuthenticationSystemCommand.CreateRequest request) {}
 
-  record SendCodeToEmailResponse(Authentication domain) {}
+  record CreateResponse(Authentication domain) {}
+
+  record ValidateRequest(AuthenticationSystemCommand.ValidateRequest request) {}
+
+  record ValidateResponse(boolean isValid) {}
 }

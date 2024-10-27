@@ -1,13 +1,17 @@
 package com.boot2.hexagonal.core.domains;
 
-import com.boot2.hexagonal.api.data.AuthenticationCode;
 import com.boot2.hexagonal.api.data.EmailAddress;
+import com.boot2.hexagonal.core.domains.messages.EmailMessage;
+import com.boot2.hexagonal.core.domains.messages.EmailMessage.SendCodeRequest;
 import com.boot2.hexagonal.core.domains.messages.EmailMessage.SendRequest;
 import com.boot2.hexagonal.core.domains.messages.EmailMessage.SendResponse;
-import com.boot2.hexagonal.core.domains.messages.EmailMessage.ValidateRequest;
-import com.boot2.hexagonal.core.domains.messages.EmailMessage.ValidateResponse;
 import java.time.ZonedDateTime;
-import lombok.*;
+import lombok.AllArgsConstructor;
+import lombok.Builder;
+import lombok.Getter;
+import lombok.NoArgsConstructor;
+import lombok.Setter;
+import lombok.ToString;
 import lombok.extern.slf4j.Slf4j;
 
 @Slf4j
@@ -22,10 +26,7 @@ public class Email {
   private String subject;
   private String body;
   private ZonedDateTime sentAt;
-
   @Setter private EmailAddress sender;
-
-  private AuthenticationCode authenticationCode;
 
   public static SendResponse send(SendRequest message) {
     var request = message.request();
@@ -41,11 +42,14 @@ public class Email {
     return response;
   }
 
-  public static ValidateResponse validate(ValidateRequest message) {
+  public static EmailMessage.SendCodeResponse sendCode(SendCodeRequest message) {
     var request = message.request();
-    var email = Email.builder().authenticationCode(request.authenticationCode()).build();
-    var response = new ValidateResponse(email);
-    log.info("Email validated: {}", response);
-    return response;
+    var authenticationData = message.authenticationData();
+    var subject = "[boot2-hexagonal] Authentication Code";
+    var body = "Your authentication code is " + authenticationData.code().value();
+    var email =
+        Email.builder().recipient(request.emailAddress()).subject(subject).body(body).build();
+    log.info("Send code: {}", email);
+    return new EmailMessage.SendCodeResponse(email);
   }
 }
