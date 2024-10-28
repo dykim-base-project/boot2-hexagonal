@@ -9,5 +9,5 @@ smtp:
   host: smtp.naver.com
   port: 465
   username: test
-  sender: tset@email.com
+  sender: sender@email.com
   password: testPassw@rd

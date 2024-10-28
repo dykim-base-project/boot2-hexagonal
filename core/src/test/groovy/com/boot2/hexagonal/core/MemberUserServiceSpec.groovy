@@ -1,9 +1,9 @@
 package com.boot2.hexagonal.core
 
 import com.boot2.hexagonal.api.EmailSystemUseCase
-import com.boot2.hexagonal.api.MemberApiFixture
+import com.boot2.hexagonal.api.MemberUserApiFixture
 import com.boot2.hexagonal.api.MemberUserUseCase
-import com.boot2.hexagonal.api.commands.EmailCommand
+import com.boot2.hexagonal.api.commands.EmailSystemCommand
 import javax.transaction.Transactional
 import org.spockframework.spring.SpringBean
 import org.springframework.beans.factory.annotation.Autowired
@@ -26,8 +26,8 @@ class MemberUserServiceSpec extends Specification {
 
     def "create() 성공"() {
         given:
-        def request = MemberApiFixture.COMMAND_CREATE
-        def expectData = MemberApiFixture.DATA_CREATED_NORMAL
+        def request = MemberUserApiFixture.COMMAND_CREATE
+        def expectData = MemberUserApiFixture.DATA_CREATED_NORMAL
 
         when:
         def responseData = memberUserUseCase.create(request)
@@ -36,6 +36,6 @@ class MemberUserServiceSpec extends Specification {
         then:
         noExceptionThrown()
         responseData == expectData
-        1 * emailSystemUseCase.validate(_ as EmailCommand.ValidateRequest)
+        1 * emailSystemUseCase.validate(_ as EmailSystemCommand.ValidateRequest)
     }
 }

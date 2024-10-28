@@ -1,12 +1,9 @@
 package com.boot2.hexagonal.server.controllers.emails
 
-import static org.springframework.test.web.servlet.request.MockMvcRequestBuilders.post
-import static org.springframework.test.web.servlet.result.MockMvcResultMatchers.content
-import static org.springframework.test.web.servlet.result.MockMvcResultMatchers.status
-
 import com.boot2.hexagonal.api.EmailSystemApiFixture
-import com.boot2.hexagonal.api.EmailSystemUseCase
-import com.boot2.hexagonal.api.commands.EmailSystemCommand
+import com.boot2.hexagonal.api.EmailUserApiFixture
+import com.boot2.hexagonal.api.EmailUserUseCase
+import com.boot2.hexagonal.api.commands.EmailUserCommand
 import com.boot2.hexagonal.server.TestConfig
 import com.fasterxml.jackson.databind.ObjectMapper
 import org.spockframework.spring.SpringBean
@@ -18,10 +15,15 @@ import org.springframework.test.context.ActiveProfiles
 import org.springframework.test.web.servlet.MockMvc
 import spock.lang.Specification
 
+import static org.springframework.test.web.client.response.MockRestResponseCreators.withNoContent
+import static org.springframework.test.web.servlet.request.MockMvcRequestBuilders.post
+import static org.springframework.test.web.servlet.result.MockMvcResultMatchers.content
+import static org.springframework.test.web.servlet.result.MockMvcResultMatchers.status
+
 @ActiveProfiles(["test"])
 @Import([TestConfig])
-@WebMvcTest(EmailSystemController)
-class EmailSystemControllerSpec extends Specification{
+@WebMvcTest(EmailUserController)
+class EmailUserControllerSpec extends Specification{
 
   @Autowired
   MockMvc mvc
@@ -30,16 +32,16 @@ class EmailSystemControllerSpec extends Specification{
   ObjectMapper objectMapper
 
   @SpringBean
-  EmailSystemUseCase useCase = Mock()
+  EmailUserUseCase useCase = Mock()
 
-  def "send() 성공"() {
+  def "sendCode() 성공"() {
     given:
-    def commandRequest = EmailSystemApiFixture.COMMAND__SEND_NORMAL
-    def responseData = EmailSystemApiFixture.DATA__NORMAL
-    useCase.send(_ as EmailSystemCommand.SendRequest) >> responseData
+    def commandRequest = EmailUserApiFixture.COMMAND__SEND_CODE_REQUEST
+    def responseData = EmailUserApiFixture.DATA__NORMAL
+    useCase.sendCode(_ as EmailUserCommand.SendCodeRequest) >> responseData
 
     expect:
-    mvc.perform(post("/v1/system/emails/send")
+    mvc.perform(post("/v1/user/emails/send-code")
             .contentType(MediaType.APPLICATION_JSON)
             .content(objectMapper.writeValueAsString(commandRequest)))
     .andExpect(status().isOk())
@@ -48,11 +50,11 @@ class EmailSystemControllerSpec extends Specification{
 
   def "validate() 성공"() {
     given:
-    def commandRequest = EmailSystemApiFixture.COMMAND__VALIDATE_NORMAL
-    useCase.validate(_ as EmailSystemCommand.ValidateRequest) >> null
+    def commandRequest = EmailUserApiFixture.COMMAND__VALIDATE_REQUEST
+    useCase.validate(_ as EmailUserCommand.ValidateRequest) >> null
 
     expect:
-    mvc.perform(post("/v1/system/emails/validate")
+    mvc.perform(post("/v1/user/emails/validate")
             .contentType(MediaType.APPLICATION_JSON)
             .content(objectMapper.writeValueAsString(commandRequest)))
     .andExpect(status().isOk())

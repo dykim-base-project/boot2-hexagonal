@@ -2,8 +2,8 @@ package com.boot2.hexagonal.core;
 
 import com.boot2.hexagonal.api.EmailSystemUseCase;
 import com.boot2.hexagonal.api.MemberUserUseCase;
-import com.boot2.hexagonal.api.commands.EmailCommand;
-import com.boot2.hexagonal.api.commands.MemberCommand;
+import com.boot2.hexagonal.api.commands.EmailSystemCommand;
+import com.boot2.hexagonal.api.commands.MemberUserCommand;
 import com.boot2.hexagonal.api.data.MemberData;
 import com.boot2.hexagonal.core.domains.Member;
 import com.boot2.hexagonal.core.domains.mappers.MemberMapper;
@@ -24,12 +24,12 @@ public class MemberUserService implements MemberUserUseCase {
   private final EmailSystemUseCase emailSystemUseCase;
 
   @Override
-  public MemberData create(MemberCommand.CreateRequest request) {
+  public MemberData create(MemberUserCommand.CreateRequest request) {
     var emailValidateRequest =
-        EmailCommand.ValidateRequest.builder()
-            .emailAddress(request.emailAddress())
-            .code(request.code())
-            .build();
+        EmailSystemCommand.ValidateRequest.builder()
+                                          .emailAddress(request.emailAddress())
+                                          .code(request.code())
+                                          .build();
     emailSystemUseCase.validate(emailValidateRequest);
 
     var messageResponse = Member.create(new MemberMessage.CreateRequest(request));

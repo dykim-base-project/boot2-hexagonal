@@ -10,7 +10,7 @@ import javax.validation.constraints.NotBlank;
 import javax.validation.constraints.NotNull;
 import lombok.Builder;
 
-public interface EmailSendHistoryCommand {
+public interface EmailSendHistorySystemCommand {
 
   @Schema(description = "이메일 발송 기록 저장 요청")
   @Builder

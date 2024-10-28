@@ -1,7 +1,7 @@
 package com.boot2.hexagonal.server.controllers.emails;
 
 import com.boot2.hexagonal.api.EmailSystemUseCase;
-import com.boot2.hexagonal.api.commands.EmailCommand;
+import com.boot2.hexagonal.api.commands.EmailSystemCommand;
 import com.boot2.hexagonal.api.data.EmailData;
 import io.swagger.v3.oas.annotations.Operation;
 import io.swagger.v3.oas.annotations.security.SecurityRequirement;
@@ -27,13 +27,13 @@ public class EmailSystemController {
 
   @Operation(summary = "이메일 전송", description = "이메일을 전송합니다.")
   @PostMapping("send")
-  public EmailData send(@RequestBody @NotNull @Valid EmailCommand.SendRequest request) {
+  public EmailData send(@RequestBody @NotNull @Valid EmailSystemCommand.SendRequest request) {
     return useCase.send(request);
   }
 
   @Operation(summary = "이메일 검증", description = "이메일을 검증합니다.")
   @PostMapping("validate")
-  public void validate(@RequestBody @NotNull @Valid EmailCommand.ValidateRequest request) {
+  public void validate(@RequestBody @NotNull @Valid EmailSystemCommand.ValidateRequest request) {
     useCase.validate(request);
   }
 }

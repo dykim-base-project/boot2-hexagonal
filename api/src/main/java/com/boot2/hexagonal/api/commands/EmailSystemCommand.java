@@ -10,7 +10,7 @@ import javax.validation.constraints.NotBlank;
 import javax.validation.constraints.NotNull;
 import lombok.Builder;
 
-public interface EmailCommand {
+public interface EmailSystemCommand {
 
   @Schema(description = "전송 요청")
   @Builder(toBuilder = true)

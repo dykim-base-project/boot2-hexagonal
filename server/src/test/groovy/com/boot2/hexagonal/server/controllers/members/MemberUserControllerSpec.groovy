@@ -4,9 +4,9 @@ import static org.springframework.test.web.servlet.request.MockMvcRequestBuilder
 import static org.springframework.test.web.servlet.result.MockMvcResultMatchers.content
 import static org.springframework.test.web.servlet.result.MockMvcResultMatchers.status
 
-import com.boot2.hexagonal.api.MemberApiFixture
+import com.boot2.hexagonal.api.MemberUserApiFixture
 import com.boot2.hexagonal.api.MemberUserUseCase
-import com.boot2.hexagonal.api.commands.MemberCommand
+import com.boot2.hexagonal.api.commands.MemberUserCommand
 import com.boot2.hexagonal.server.TestConfig
 import com.fasterxml.jackson.databind.ObjectMapper
 import org.spockframework.spring.SpringBean
@@ -34,9 +34,9 @@ class MemberUserControllerSpec extends Specification {
 
     def "create() 성공"() {
         given:
-        def commandRequest = MemberApiFixture.COMMAND_REQUEST_NORMAL
-        def responseData = MemberApiFixture.DATA_CREATED_NORMAL
-        useCase.create(_ as MemberCommand.CreateRequest) >> responseData
+        def commandRequest = MemberUserApiFixture.COMMAND_REQUEST_NORMAL
+        def responseData = MemberUserApiFixture.DATA_CREATED_NORMAL
+        useCase.create(_ as MemberUserCommand.CreateRequest) >> responseData
 
         expect:
         mvc.perform(post("/v1/user/members")

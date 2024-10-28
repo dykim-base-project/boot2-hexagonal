@@ -8,7 +8,7 @@ import javax.validation.constraints.NotBlank;
 import javax.validation.constraints.NotNull;
 import lombok.Builder;
 
-public interface MemberCommand {
+public interface MemberUserCommand {
 
   @Builder
   record CreateRequest(
