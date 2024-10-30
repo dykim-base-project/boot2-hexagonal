@@ -10,10 +10,21 @@ class "이메일" as email {
 }
 
 class "인증" as authentication {
-  * id String(타입에 의존한 값)
+  * id String
   ---
   type
   code
+}
+
+class "인증 기록" as authentication_history {
+  * id - bigint
+  jpa envers 로 구현해보기.
+  ---
+  authentication_id
+  authentication_type
+  authenticated
+  create_id
+  created_at
 }
 
 class "이메일 전송 기록" as email_send_history {

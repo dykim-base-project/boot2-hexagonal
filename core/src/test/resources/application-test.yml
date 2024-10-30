@@ -1,8 +1,8 @@
 spring:
   redis:
     host: localhost
-    #    port: 6380
-    port: ${random.int[10000,65536]}
+#    port: ${random.int[10000,65536]}
+    port: 16379
     password:
 
 smtp:

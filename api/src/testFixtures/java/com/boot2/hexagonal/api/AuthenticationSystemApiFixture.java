@@ -11,16 +11,15 @@ public interface AuthenticationSystemApiFixture {
 
   AuthenticationId ID_EMAIL_NORMAL = AuthenticationId.from(EmailAddress.from("test@email.com"));
 
-  AuthenticationSystemCommand.CreateRequest COMMAND__CREATE_REQUEST_NORMAL =
+  AuthenticationSystemCommand.CreateRequest COMMAND__CREATE_REQUEST_EMAIL_NORMAL =
       AuthenticationSystemCommand.CreateRequest.builder()
           .id(ID_EMAIL_NORMAL)
+          .type(AuthenticationTypeKind.EMAIL)
           .build();
 
   AuthenticationData DATA__EMAIL_NORMAL =
       AuthenticationData.builder()
           .id(ID_EMAIL_NORMAL)
-          .type(AuthenticationTypeKind.EMAIL)
           .code(AuthenticationCode.from("test code"))
           .build();
-
 }

@@ -5,13 +5,7 @@ import com.boot2.hexagonal.api.data.AuthenticationTypeKind;
 import com.boot2.hexagonal.api.data.id.AuthenticationId;
 import com.boot2.hexagonal.core.domains.messages.AuthenticationMessage;
 import java.security.SecureRandom;
-import lombok.AllArgsConstructor;
-import lombok.Builder;
-import lombok.EqualsAndHashCode;
-import lombok.Getter;
-import lombok.NoArgsConstructor;
-import lombok.SneakyThrows;
-import lombok.ToString;
+import lombok.*;
 import lombok.extern.slf4j.Slf4j;
 
 @Slf4j
@@ -33,7 +27,7 @@ public class Authentication {
     var authentication =
         Authentication.builder()
             .id(request.id())
-            .type(AuthenticationTypeKind.EMAIL)
+            .type(request.type())
             .code(AuthenticationCode.from(generateRandomNum(6)))
             .build();
     log.info("Create authentication: {}", authentication);

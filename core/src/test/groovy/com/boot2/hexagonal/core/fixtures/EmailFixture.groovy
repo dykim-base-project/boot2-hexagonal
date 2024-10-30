@@ -4,7 +4,6 @@ import com.boot2.hexagonal.api.EmailSystemApiFixture
 import com.boot2.hexagonal.api.EmailUserApiFixture
 import com.boot2.hexagonal.api.data.EmailAddress
 import com.boot2.hexagonal.core.domains.Email
-
 import java.time.ZonedDateTime
 
 interface EmailFixture {

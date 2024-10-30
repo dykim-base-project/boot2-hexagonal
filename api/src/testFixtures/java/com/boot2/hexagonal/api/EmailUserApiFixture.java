@@ -11,19 +11,16 @@ public interface EmailUserApiFixture {
   ZonedDateTime NOW = ZonedDateTime.now();
 
   EmailUserCommand.SendCodeRequest COMMAND__SEND_CODE_REQUEST =
-    EmailUserCommand.SendCodeRequest.builder()
-                                    .emailAddress(EmailAddress.from("test@email.com"))
-                                    .build();
+      EmailUserCommand.SendCodeRequest.builder()
+          .emailAddress(EmailAddress.from("test@email.com"))
+          .build();
 
   EmailUserCommand.ValidateRequest COMMAND__VALIDATE_REQUEST =
-    EmailUserCommand.ValidateRequest.builder()
-                                    .emailAddress(COMMAND__SEND_CODE_REQUEST.emailAddress())
-                                    .code(AuthenticationCode.from("test value"))
-                                    .build();
+      EmailUserCommand.ValidateRequest.builder()
+          .emailAddress(COMMAND__SEND_CODE_REQUEST.emailAddress())
+          .code(AuthenticationCode.from("test value"))
+          .build();
 
   EmailData DATA__NORMAL =
-    EmailData.builder()
-        .recipient(COMMAND__SEND_CODE_REQUEST.emailAddress())
-        .sentAt(NOW)
-        .build();
+      EmailData.builder().recipient(COMMAND__SEND_CODE_REQUEST.emailAddress()).sentAt(NOW).build();
 }

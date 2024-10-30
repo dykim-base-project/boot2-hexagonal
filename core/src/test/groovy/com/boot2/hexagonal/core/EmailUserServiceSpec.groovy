@@ -11,6 +11,7 @@ import com.boot2.hexagonal.core.domains.Email
 import com.boot2.hexagonal.core.domains.ports.EmailPort
 import com.boot2.hexagonal.core.fixtures.AuthenticationFixture
 import com.boot2.hexagonal.core.fixtures.EmailFixture
+import javax.transaction.Transactional
 import org.spockframework.spring.SpringBean
 import org.springframework.beans.factory.annotation.Autowired
 import org.springframework.boot.test.context.SpringBootTest
@@ -18,10 +19,8 @@ import org.springframework.context.annotation.Import
 import org.springframework.test.context.ActiveProfiles
 import spock.lang.Specification
 
-import javax.transaction.Transactional
-
 @Transactional
-@ActiveProfiles(["test", "embedded-redis"])
+@ActiveProfiles(["test"])
 @Import([TestConfig])
 @SpringBootTest(classes = [CoreTestApplication.class])
 class EmailUserServiceSpec extends Specification {

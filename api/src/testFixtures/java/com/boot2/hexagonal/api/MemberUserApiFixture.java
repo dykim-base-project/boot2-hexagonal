@@ -13,11 +13,11 @@ public interface MemberUserApiFixture {
   ZonedDateTime NOW = ZonedDateTime.now();
   MemberUserCommand.CreateRequest COMMAND_CREATE =
       MemberUserCommand.CreateRequest.builder()
-                                     .name("name")
-                                     .emailAddress(EmailAddress.from("request@emailAddress.com"))
-                                     .code(AuthenticationCode.from("test"))
-                                     .password("password")
-                                     .build();
+          .name("name")
+          .emailAddress(EmailAddress.from("request@emailAddress.com"))
+          .code(AuthenticationCode.from("test"))
+          .password("password")
+          .build();
 
   MemberData DATA_CREATED_NORMAL =
       MemberData.builder()
@@ -31,9 +31,9 @@ public interface MemberUserApiFixture {
 
   MemberUserCommand.CreateRequest COMMAND_REQUEST_NORMAL =
       MemberUserCommand.CreateRequest.builder()
-                                     .emailAddress(EmailAddress.from("normal@emailAddress.com"))
-                                     .name("normal")
-                                     .password("password")
-                                     .code(AuthenticationCode.from("authCode"))
-                                     .build();
+          .emailAddress(EmailAddress.from("normal@emailAddress.com"))
+          .name("normal")
+          .password("password")
+          .code(AuthenticationCode.from("authCode"))
+          .build();
 }

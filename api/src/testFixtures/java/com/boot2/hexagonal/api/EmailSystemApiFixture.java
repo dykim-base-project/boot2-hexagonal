@@ -12,16 +12,16 @@ public interface EmailSystemApiFixture {
 
   EmailSystemCommand.SendRequest COMMAND__SEND_NORMAL =
       EmailSystemCommand.SendRequest.builder()
-                                    .recipient(EmailAddress.from("test@email.com"))
-                                    .subject("test subject")
-                                    .body("test body")
-                                    .build();
+          .recipient(EmailAddress.from("test@email.com"))
+          .subject("test subject")
+          .body("test body")
+          .build();
 
   EmailSystemCommand.ValidateRequest COMMAND__VALIDATE_NORMAL =
       EmailSystemCommand.ValidateRequest.builder()
-                                        .emailAddress(COMMAND__SEND_NORMAL.recipient())
-        .code(AuthenticationCode.from("test value"))
-                                        .build();
+          .emailAddress(COMMAND__SEND_NORMAL.recipient())
+          .code(AuthenticationCode.from("test value"))
+          .build();
 
   EmailData DATA__NORMAL =
       EmailData.builder()

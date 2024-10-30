@@ -20,9 +20,12 @@ import org.hibernate.annotations.Comment;
 @EqualsAndHashCode(of = "id")
 @Entity
 @Table(
-  name = "member",
-  uniqueConstraints = { @UniqueConstraint(name = "uk__email_address", columnNames = { "email_address" }) }
-)
+    name = "member",
+    uniqueConstraints = {
+      @UniqueConstraint(
+          name = "uk__email_address",
+          columnNames = {"email_address"})
+    })
 @org.hibernate.annotations.Table(appliesTo = "member", comment = "회원")
 public class MemberEntity {
 

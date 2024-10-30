@@ -1,5 +1,10 @@
 package com.boot2.hexagonal.server.controllers.emails
 
+import static org.springframework.test.web.client.response.MockRestResponseCreators.withNoContent
+import static org.springframework.test.web.servlet.request.MockMvcRequestBuilders.post
+import static org.springframework.test.web.servlet.result.MockMvcResultMatchers.content
+import static org.springframework.test.web.servlet.result.MockMvcResultMatchers.status
+
 import com.boot2.hexagonal.api.EmailSystemApiFixture
 import com.boot2.hexagonal.api.EmailUserApiFixture
 import com.boot2.hexagonal.api.EmailUserUseCase
@@ -14,11 +19,6 @@ import org.springframework.http.MediaType
 import org.springframework.test.context.ActiveProfiles
 import org.springframework.test.web.servlet.MockMvc
 import spock.lang.Specification
-
-import static org.springframework.test.web.client.response.MockRestResponseCreators.withNoContent
-import static org.springframework.test.web.servlet.request.MockMvcRequestBuilders.post
-import static org.springframework.test.web.servlet.result.MockMvcResultMatchers.content
-import static org.springframework.test.web.servlet.result.MockMvcResultMatchers.status
 
 @ActiveProfiles(["test"])
 @Import([TestConfig])

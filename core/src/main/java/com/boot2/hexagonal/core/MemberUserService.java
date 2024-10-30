@@ -27,9 +27,9 @@ public class MemberUserService implements MemberUserUseCase {
   public MemberData create(MemberUserCommand.CreateRequest request) {
     var emailValidateRequest =
         EmailSystemCommand.ValidateRequest.builder()
-                                          .emailAddress(request.emailAddress())
-                                          .code(request.code())
-                                          .build();
+            .emailAddress(request.emailAddress())
+            .code(request.code())
+            .build();
     emailSystemUseCase.validate(emailValidateRequest);
 
     var messageResponse = Member.create(new MemberMessage.CreateRequest(request));

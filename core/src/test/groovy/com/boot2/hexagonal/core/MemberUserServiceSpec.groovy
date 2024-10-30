@@ -13,7 +13,7 @@ import org.springframework.test.context.ActiveProfiles
 import spock.lang.Specification
 
 @Transactional
-@ActiveProfiles(["test", "embedded-redis"])
+@ActiveProfiles(["test"])
 @Import([TestConfig])
 @SpringBootTest(classes = [CoreTestApplication.class])
 class MemberUserServiceSpec extends Specification {
