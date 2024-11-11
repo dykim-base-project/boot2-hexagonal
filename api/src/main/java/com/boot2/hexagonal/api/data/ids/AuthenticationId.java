@@ -1,13 +1,16 @@
-package com.boot2.hexagonal.api.data.id;
+package com.boot2.hexagonal.api.data.ids;
 
 import com.boot2.hexagonal.api.data.EmailAddress;
 import com.fasterxml.jackson.annotation.JsonCreator;
 import com.fasterxml.jackson.annotation.JsonValue;
 import java.util.Optional;
 import javax.validation.constraints.NotBlank;
+import javax.validation.constraints.Size;
 import org.springframework.lang.NonNull;
 
-public record AuthenticationId(@NotBlank @JsonValue String value) {
+public record AuthenticationId(@NotBlank @Size(max = MAX_LENGTH) @JsonValue String value) {
+
+  public static final int MAX_LENGTH = 254;
 
   @JsonCreator
   public static AuthenticationId from(@NonNull String value) {

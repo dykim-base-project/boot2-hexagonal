@@ -36,6 +36,16 @@ jobs:
     - name: Build with Gradle Wrapper
       run: ./gradlew build
 
+    - name: Comment test coverage on PR
+      id: jacoco
+      uses: madrapps/jacoco-report@v1.2
+      with:
+        title: 📝 jacoco test code coverage report(with.aggregation)
+        paths: ${{ github.workspace }}/build/reports/jacoco/testCodeCoverageReport/html/index.xml
+        token: ${{ secrets.PRIVATE_REPO_ACCESS_TOKEN }}
+        min-coverage-overall: 50
+        min-coverage-changed-files: 50
+
     # NOTE: The Gradle Wrapper is the default and recommended way to run Gradle (https://docs.gradle.org/current/userguide/gradle_wrapper.html).
     # If your project does not have the Gradle Wrapper configured, you can use the following configuration to run Gradle with a specified version.
     #

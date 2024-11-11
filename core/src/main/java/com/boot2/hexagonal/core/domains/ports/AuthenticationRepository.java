@@ -1,6 +1,6 @@
 package com.boot2.hexagonal.core.domains.ports;
 
-import com.boot2.hexagonal.api.data.id.AuthenticationId;
+import com.boot2.hexagonal.api.data.ids.AuthenticationId;
 import com.boot2.hexagonal.core.domains.Authentication;
 import java.util.Optional;
 

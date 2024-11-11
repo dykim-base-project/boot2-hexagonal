@@ -1,4 +1,4 @@
-package com.boot2.hexagonal.api.data.id;
+package com.boot2.hexagonal.api.data.ids;
 
 import com.fasterxml.jackson.annotation.JsonCreator;
 import com.fasterxml.jackson.annotation.JsonValue;
@@ -19,11 +19,11 @@ public record EmailSendHistoryId(@NotNull @JsonValue Long value) implements Seri
   }
 
   public interface Mapper {
-    default Long map(EmailSendHistoryId value) {
+    default Long emailSendHistoryId(EmailSendHistoryId value) {
       return Optional.ofNullable(value).map(EmailSendHistoryId::value).orElse(null);
     }
 
-    default EmailSendHistoryId map(Long value) {
+    default EmailSendHistoryId emailSendHistoryId(Long value) {
       return Optional.ofNullable(value).map(EmailSendHistoryId::from).orElse(null);
     }
   }

@@ -2,10 +2,17 @@ package com.boot2.hexagonal.core.domains;
 
 import com.boot2.hexagonal.api.data.AuthenticationCode;
 import com.boot2.hexagonal.api.data.AuthenticationTypeKind;
-import com.boot2.hexagonal.api.data.id.AuthenticationId;
+import com.boot2.hexagonal.api.data.ids.AuthenticationId;
+import com.boot2.hexagonal.api.exceptions.AuthenticationInvalidException;
 import com.boot2.hexagonal.core.domains.messages.AuthenticationMessage;
 import java.security.SecureRandom;
-import lombok.*;
+import lombok.AllArgsConstructor;
+import lombok.Builder;
+import lombok.EqualsAndHashCode;
+import lombok.Getter;
+import lombok.NoArgsConstructor;
+import lombok.SneakyThrows;
+import lombok.ToString;
 import lombok.extern.slf4j.Slf4j;
 
 @Slf4j
@@ -34,15 +41,13 @@ public class Authentication {
     return new AuthenticationMessage.CreateResponse(authentication);
   }
 
-  public AuthenticationMessage.ValidateResponse validate(
-      AuthenticationMessage.ValidateRequest message) {
+  public void validate(AuthenticationMessage.ValidateRequest message) {
     var request = message.request();
     if (!request.code().equals(this.code)) {
       log.error("Invalid authentication code: {}", request);
-      return new AuthenticationMessage.ValidateResponse(false);
+      throw new AuthenticationInvalidException();
     }
     log.info("Validate authentication code: {}", this);
-    return new AuthenticationMessage.ValidateResponse(true);
   }
 
   @SneakyThrows

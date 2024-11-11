@@ -10,6 +10,4 @@ public interface AuthenticationMessage {
   record CreateResponse(Authentication domain) {}
 
   record ValidateRequest(AuthenticationSystemCommand.ValidateRequest request) {}
-
-  record ValidateResponse(boolean isValid) {}
 }

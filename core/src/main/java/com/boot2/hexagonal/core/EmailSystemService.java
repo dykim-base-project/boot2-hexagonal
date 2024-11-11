@@ -6,7 +6,7 @@ import com.boot2.hexagonal.api.commands.AuthenticationSystemCommand;
 import com.boot2.hexagonal.api.commands.EmailSendHistorySystemCommand;
 import com.boot2.hexagonal.api.commands.EmailSystemCommand;
 import com.boot2.hexagonal.api.data.EmailData;
-import com.boot2.hexagonal.api.data.id.AuthenticationId;
+import com.boot2.hexagonal.api.data.ids.AuthenticationId;
 import com.boot2.hexagonal.core.domains.Email;
 import com.boot2.hexagonal.core.domains.EmailSendHistory;
 import com.boot2.hexagonal.core.domains.mappers.EmailMapper;

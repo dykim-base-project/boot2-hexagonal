@@ -1,7 +1,7 @@
 package com.boot2.hexagonal.core.domains;
 
 import com.boot2.hexagonal.api.data.EmailAddress;
-import com.boot2.hexagonal.api.data.id.EmailSendHistoryId;
+import com.boot2.hexagonal.api.data.ids.EmailSendHistoryId;
 import com.boot2.hexagonal.core.domains.messages.EmailSendHistoryMessage.CreateRequest;
 import com.boot2.hexagonal.core.domains.messages.EmailSendHistoryMessage.CreateResponse;
 import java.time.ZonedDateTime;
@@ -12,7 +12,7 @@ import lombok.extern.slf4j.Slf4j;
 @EqualsAndHashCode(of = "id")
 @ToString
 @Getter
-@Builder
+@Builder(toBuilder = true)
 @NoArgsConstructor
 @AllArgsConstructor
 public class EmailSendHistory {

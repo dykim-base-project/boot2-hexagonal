@@ -1,6 +1,6 @@
 package com.boot2.hexagonal.api.data;
 
-import com.boot2.hexagonal.api.data.id.AuthenticationId;
+import com.boot2.hexagonal.api.data.ids.AuthenticationId;
 import io.swagger.v3.oas.annotations.media.Schema;
 import io.swagger.v3.oas.annotations.media.Schema.RequiredMode;
 import lombok.Builder;
@@ -10,4 +10,5 @@ import lombok.Builder;
 public record AuthenticationData(
     @Schema(description = "id. 인증 타입에 대한 값", requiredMode = RequiredMode.REQUIRED)
         AuthenticationId id,
+    @Schema(description = "인증 타입") AuthenticationTypeKind type,
     @Schema(description = "인증 코드", requiredMode = RequiredMode.REQUIRED) AuthenticationCode code) {}

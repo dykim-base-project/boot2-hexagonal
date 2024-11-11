@@ -1,4 +1,4 @@
-package com.boot2.hexagonal.api.data.id;
+package com.boot2.hexagonal.api.data.ids;
 
 import com.fasterxml.jackson.annotation.JsonCreator;
 import com.fasterxml.jackson.annotation.JsonValue;
@@ -7,7 +7,7 @@ import java.util.Optional;
 import javax.validation.constraints.NotNull;
 import lombok.NonNull;
 
-public record MemberId(@NotNull @JsonValue Long value) implements Serializable {
+public record MemberId(@NotNull @JsonValue Long value) implements Serializable, ValueWrapper<Long> {
 
   @JsonCreator
   public static MemberId from(@NonNull Long value) {

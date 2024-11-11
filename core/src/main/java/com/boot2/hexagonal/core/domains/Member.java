@@ -2,7 +2,7 @@ package com.boot2.hexagonal.core.domains;
 
 import com.boot2.hexagonal.api.data.EmailAddress;
 import com.boot2.hexagonal.api.data.MemberStatusKind;
-import com.boot2.hexagonal.api.data.id.MemberId;
+import com.boot2.hexagonal.api.data.ids.MemberId;
 import com.boot2.hexagonal.core.domains.messages.MemberMessage.CreateRequest;
 import com.boot2.hexagonal.core.domains.messages.MemberMessage.CreateResponse;
 import java.time.ZonedDateTime;

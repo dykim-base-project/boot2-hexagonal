@@ -1,6 +1,6 @@
 package com.boot2.hexagonal.api.data;
 
-import com.boot2.hexagonal.api.data.id.EmailSendHistoryId;
+import com.boot2.hexagonal.api.data.ids.EmailSendHistoryId;
 import io.swagger.v3.oas.annotations.media.Schema;
 import java.time.ZonedDateTime;
 import lombok.Builder;

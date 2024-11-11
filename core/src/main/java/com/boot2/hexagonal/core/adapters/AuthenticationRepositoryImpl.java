@@ -1,6 +1,6 @@
 package com.boot2.hexagonal.core.adapters;
 
-import com.boot2.hexagonal.api.data.id.AuthenticationId;
+import com.boot2.hexagonal.api.data.ids.AuthenticationId;
 import com.boot2.hexagonal.core.adapters.redis.mappers.AuthenticationRedisRepositoryMapper;
 import com.boot2.hexagonal.core.adapters.redis.repositories.AuthenticationRedisRepository;
 import com.boot2.hexagonal.core.domains.Authentication;

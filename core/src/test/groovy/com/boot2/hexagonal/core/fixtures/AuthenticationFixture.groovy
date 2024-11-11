@@ -2,7 +2,7 @@ package com.boot2.hexagonal.core.fixtures
 
 import com.boot2.hexagonal.api.data.AuthenticationCode
 import com.boot2.hexagonal.api.data.EmailAddress
-import com.boot2.hexagonal.api.data.id.AuthenticationId
+import com.boot2.hexagonal.api.data.ids.AuthenticationId
 import com.boot2.hexagonal.core.domains.Authentication
 
 interface AuthenticationFixture {

@@ -18,12 +18,11 @@ class "인증" as authentication {
 
 class "인증 기록" as authentication_history {
   * id - bigint
-  jpa envers 로 구현해보기.
   ---
   authentication_id
   authentication_type
   authenticated
-  create_id
+  worker_id
   created_at
 }
 
