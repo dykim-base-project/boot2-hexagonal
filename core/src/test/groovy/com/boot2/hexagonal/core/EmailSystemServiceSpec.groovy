@@ -5,7 +5,9 @@ import com.boot2.hexagonal.api.EmailSystemApiFixture
 import com.boot2.hexagonal.api.EmailSystemUseCase
 import com.boot2.hexagonal.api.commands.AuthenticationSystemCommand
 import com.boot2.hexagonal.core.domains.Email
+import com.boot2.hexagonal.core.domains.EmailSendHistory
 import com.boot2.hexagonal.core.domains.ports.EmailPort
+import com.boot2.hexagonal.core.domains.ports.EmailSendHistoryRepository
 import com.boot2.hexagonal.core.fixtures.EmailFixture
 import javax.transaction.Transactional
 import org.spockframework.spring.SpringBean
@@ -28,6 +30,9 @@ class EmailSystemServiceSpec extends Specification {
   EmailPort port = Mock()
 
   @SpringBean
+  EmailSendHistoryRepository emailSendHistoryRepository = Mock()
+
+  @SpringBean
   AuthenticationSystemUseCase authenticationSystemUseCase = Mock()
 
   def "send() 성공"() {
@@ -40,6 +45,7 @@ class EmailSystemServiceSpec extends Specification {
     then:
     noExceptionThrown()
     1 * port.send(_ as Email) >> EmailFixture.DOMAIN__SEND_NORMAL
+    1 * emailSendHistoryRepository.create(_ as EmailSendHistory)
   }
 
   def "validate() 성공"() {

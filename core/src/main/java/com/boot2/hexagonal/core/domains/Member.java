@@ -39,7 +39,7 @@ public class Member {
                 .createdAt(now)
                 .modifiedAt(now)
                 .build());
-    log.info("domain created: {}", response);
+    log.info("email created: {}", response);
     return response;
   }
 }
