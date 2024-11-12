@@ -19,11 +19,10 @@ public class MailConfig {
   @Value("${smtp.username}")
   private String username;
 
-  @Value("${smtp.password}")
-  private String password;
-
   @Bean
   public MailSender mailSender() {
+    var password = System.getenv("SMTP_PASSWORD");
+
     var javaMailSender = new JavaMailSenderImpl();
     javaMailSender.setHost(host);
     javaMailSender.setPort(Integer.parseInt(port));
