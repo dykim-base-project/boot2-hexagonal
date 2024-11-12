@@ -1,5 +1,16 @@
 @startuml
 
+class "회원" as member {
+    * id - bigint(JPA H2 대응을 위해 unsigned X)
+    ---
+    name varchar(20)
+    email_address varchar(254)
+    email_validated boolean
+    status varchar(20)
+    created_at datetime(3)
+    modified_at datetime(3)
+}
+
 class "이메일" as email {
     이메일 도메인
     ---
@@ -7,6 +18,26 @@ class "이메일" as email {
     recipient
     subject
     body
+}
+
+class "이메일 전송 기록" as email_send_history {
+    * id - bigint
+    ---
+    sender varchar(254) email_address 도메인
+    recipient varchar(254) email_address 도메인
+    subject varchar(100)
+    body varchar(255)
+    sent_at datetime(3)
+}
+
+email -{ email_send_history
+
+class "인증 id Record" as authentication_id {
+  * email_address
+}
+
+enum "인증 타입" as authentication_type {
+  EMAIL
 }
 
 class "인증" as authentication {
@@ -26,27 +57,9 @@ class "인증 기록" as authentication_history {
   created_at
 }
 
-class "이메일 전송 기록" as email_send_history {
-    * id - bigint
-    ---
-    sender varchar(254) email_address 도메인
-    recipient varchar(254) email_address 도메인
-    subject varchar(100)
-    body varchar(255)
-    sent_at datetime(3)
-}
-
-class "회원" as member {
-    * id - bigint(JPA H2 대응을 위해 unsigned X)
-    ---
-    name varchar(20)
-    email_address varchar(254)
-    email_validated boolean
-    status varchar(20)
-    created_at datetime(3)
-    modified_at datetime(3)
-}
-
+authentication_type <. authentication
+authentication_id <.. authentication
+authentication -{ authentication_history
 
 'class "권한" {
 '    id
