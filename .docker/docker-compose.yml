@@ -12,7 +12,7 @@ services:
     cap_add:
       - SYS_NICE
     ports:
-      - "3306:3306"
+      - "13306:3306"
     networks:
       - boot2
   redis:
@@ -22,7 +22,7 @@ services:
       - "name=redis"
       - "mode=standalone"
     ports:
-      - "6379:6379"
+      - "16379:6379"
     command: redis-server --requirepass p@ssw0rd
     networks:
       - boot2

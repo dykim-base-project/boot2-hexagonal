@@ -1,13 +1,22 @@
-create table members
-(
-    id               bigint unsigned auto_increment comment 'id',
-    email            varchar(320) not null comment '이메일',
-    password         varchar(100) not null comment '비밀번호',
-    name             varchar(50) not null comment '이름',
-    status           varchar(20) not null comment '상태',
-    sign_up_at        bigint unsigned not null comment '가입 일시',
-    modified_at      bigint unsigned not null comment '수정 일시',
-    primary key (id),
-    unique key `uk-email` (email),
-    key `idx-status` (status)
-) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COMMENT='회원';
+CREATE TABLE `member` (
+                          `id` bigint NOT NULL AUTO_INCREMENT COMMENT 'id',
+                          `created_at` datetime(3) NOT NULL COMMENT '생성 일시',
+                          `email_address` varchar(254) COLLATE utf8mb4_unicode_ci NOT NULL COMMENT '이메일 주소',
+                          `email_validated` bit(1) NOT NULL COMMENT '이메일 검증 여부',
+                          `modified_at` datetime(3) NOT NULL COMMENT '수정 일시',
+                          `name` varchar(255) COLLATE utf8mb4_unicode_ci DEFAULT NULL COMMENT '이름',
+                          `password` varchar(255) COLLATE utf8mb4_unicode_ci DEFAULT NULL COMMENT '비밀번호',
+                          `status` varchar(255) COLLATE utf8mb4_unicode_ci DEFAULT NULL COMMENT '상태',
+                          PRIMARY KEY (`id`),
+                          UNIQUE KEY `uk__email_address` (`email_address`)
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci COMMENT='회원';
+
+CREATE TABLE `email_send_history` (
+                                      `id` bigint NOT NULL AUTO_INCREMENT COMMENT 'id',
+                                      `body` varchar(255) COLLATE utf8mb4_unicode_ci NOT NULL COMMENT '내용',
+                                      `recipient` varchar(254) COLLATE utf8mb4_unicode_ci NOT NULL COMMENT '수신자',
+                                      `sender` varchar(254) COLLATE utf8mb4_unicode_ci NOT NULL COMMENT '발신자',
+                                      `sent_at` datetime(3) NOT NULL COMMENT '발신 일시',
+                                      `subject` varchar(100) COLLATE utf8mb4_unicode_ci NOT NULL COMMENT '제목',
+                                      PRIMARY KEY (`id`)
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci COMMENT='이메일 발신 이력';

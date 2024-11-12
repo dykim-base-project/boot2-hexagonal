@@ -2,13 +2,13 @@ package com.boot2.hexagonal.core;
 
 import com.boot2.hexagonal.api.EmailSystemUseCase;
 import com.boot2.hexagonal.api.MemberUserUseCase;
-import com.boot2.hexagonal.api.command.EmailValidateCommand;
-import com.boot2.hexagonal.api.command.MemberCreateCommand;
+import com.boot2.hexagonal.api.commands.EmailSystemCommand;
+import com.boot2.hexagonal.api.commands.MemberUserCommand;
 import com.boot2.hexagonal.api.data.MemberData;
-import com.boot2.hexagonal.core.domain.Member;
-import com.boot2.hexagonal.core.domain.MemberMapper;
-import com.boot2.hexagonal.core.domain.message.MemberCreateMessage;
-import com.boot2.hexagonal.core.domain.port.MemberRepository;
+import com.boot2.hexagonal.core.domains.Member;
+import com.boot2.hexagonal.core.domains.mappers.MemberMapper;
+import com.boot2.hexagonal.core.domains.messages.MemberMessage;
+import com.boot2.hexagonal.core.domains.ports.MemberRepository;
 import lombok.RequiredArgsConstructor;
 import org.springframework.stereotype.Service;
 import org.springframework.validation.annotation.Validated;
@@ -21,19 +21,19 @@ public class MemberUserService implements MemberUserUseCase {
   private final MemberRepository repository;
   private final MemberMapper mapper;
 
-  // TODO: 이메일 useCase adapter 에서 조립하기
   private final EmailSystemUseCase emailSystemUseCase;
 
   @Override
-  public MemberData create(MemberCreateCommand.Request request) {
+  public MemberData create(MemberUserCommand.CreateRequest request) {
     var emailValidateRequest =
-        EmailValidateCommand.Request.builder()
-            .authenticationCode(request.authenticationCode())
+        EmailSystemCommand.ValidateRequest.builder()
+            .emailAddress(request.emailAddress())
+            .code(request.code())
             .build();
     emailSystemUseCase.validate(emailValidateRequest);
 
-    var messageResponse = Member.create(new MemberCreateMessage.Request(request));
-    var savedMember = repository.create(messageResponse.member());
-    return mapper.toMemberData(savedMember);
+    var messageResponse = Member.create(new MemberMessage.CreateRequest(request));
+    var savedMember = repository.create(messageResponse.domain());
+    return mapper.map(savedMember);
   }
 }

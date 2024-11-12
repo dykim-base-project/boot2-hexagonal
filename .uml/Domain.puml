@@ -1,0 +1,75 @@
+@startuml
+
+class "이메일" as email {
+    이메일 도메인
+    ---
+    sender
+    recipient
+    subject
+    body
+}
+
+class "인증" as authentication {
+  * id String
+  ---
+  type
+  code
+}
+
+class "인증 기록" as authentication_history {
+  * id - bigint
+  ---
+  authentication_id
+  authentication_type
+  authenticated
+  worker_id
+  created_at
+}
+
+class "이메일 전송 기록" as email_send_history {
+    * id - bigint
+    ---
+    sender varchar(254) email_address 도메인
+    recipient varchar(254) email_address 도메인
+    subject varchar(100)
+    body varchar(255)
+    sent_at datetime(3)
+}
+
+class "회원" as member {
+    * id - bigint(JPA H2 대응을 위해 unsigned X)
+    ---
+    name varchar(20)
+    email_address varchar(254)
+    email_validated boolean
+    status varchar(20)
+    created_at datetime(3)
+    modified_at datetime(3)
+}
+
+
+'class "권한" {
+'    id
+'    ---
+'    권한 => 이메일_인증, 이메일_미인증, SNS_인증?
+'    스프링 시큐리티로 구현하셨음. 따라가보자.(도메인이 아닌거 같은데 그러면)
+'}
+
+' TODO: 추후 작업 예정(프론트 없이 가능? 안되면 프론트 이후 작업)
+'class "SNS 인증" {
+'    id
+'    ___
+'    회원 id
+'    SNS 인증 종류
+'    리프레시 토큰 => 리프레시 토큰 만료 시 어떻게? 찾아보자.
+'}
+
+' TODO: 추후 작업 예정
+'class "회원-권한" {
+'    회원 id
+'    권한 id
+'    ---
+'    굳이 관계 테이블까지?
+'}
+
+@enduml

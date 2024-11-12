@@ -1,6 +1,36 @@
 spring:
   redis:
     host: localhost
-    #    port: 6380
-    port: ${random.int[10000,65536]}
+#    port: ${random.int[10000,65536]}
+    port: 16379
     password:
+
+smtp:
+  host: smtp.naver.com
+  port: 465
+  username: test
+  sender: sender@email.com
+
+email:
+  format:
+    request-authentication-code:
+      subject: Send Authentication Code
+      body: |
+        <!DOCTYPE html>
+        <html>
+        <head>
+        <style>
+        h1 {
+          color: white;
+          text-align: center;
+        }
+        </style>
+        </head>
+        <div style="background-color: lightblue;">
+        <h1>인증 코드 전송</h1>
+        인증 코드는 
+        <span style="color: blue; font-size: 30px; user-select: all">${authenticationCode}</span>
+        입니다.
+        
+        </div>
+        </html>

@@ -2,7 +2,10 @@ dependencies {
     implementation "com.fasterxml.jackson.core:jackson-annotations"
     implementation 'javax.validation:validation-api:2.0.1.Final'
     implementation 'org.springframework:spring-web'
+
     compileOnly 'org.springframework.data:spring-data-commons'
+
+    testFixturesImplementation 'io.swagger.core.v3:swagger-annotations:2.2.22'
 }
 
 bootJar {

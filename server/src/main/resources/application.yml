@@ -72,7 +72,7 @@ spring:
       on-profile: "api-doc"
 
 springdoc:
-  packages-to-scan: com.boot2.hexagonal.server.controller
+  packages-to-scan: com.boot2.hexagonal.server.controllers
   default-consumes-media-type: application/json;charset=UTF-8
   default-produces-media-type: application/json;charset=UTF-8
   api-docs:
