@@ -1,0 +1,13 @@
+@startuml
+
+class "회원" as member {
+    * id - bigint(JPA H2 대응을 위해 unsigned X)
+    ---
+    name varchar(20)
+    email_address varchar(254)
+    email_validated boolean
+    status varchar(20)
+    created_at datetime(3)
+    modified_at datetime(3)
+}
+@enduml
