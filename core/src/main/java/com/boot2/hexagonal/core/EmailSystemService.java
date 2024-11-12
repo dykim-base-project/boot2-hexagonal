@@ -3,7 +3,6 @@ package com.boot2.hexagonal.core;
 import com.boot2.hexagonal.api.AuthenticationSystemUseCase;
 import com.boot2.hexagonal.api.EmailSystemUseCase;
 import com.boot2.hexagonal.api.commands.AuthenticationSystemCommand;
-import com.boot2.hexagonal.api.commands.EmailSendHistorySystemCommand;
 import com.boot2.hexagonal.api.commands.EmailSystemCommand;
 import com.boot2.hexagonal.api.data.EmailData;
 import com.boot2.hexagonal.api.data.ids.AuthenticationId;
@@ -36,16 +35,8 @@ public class EmailSystemService implements EmailSystemUseCase {
     var email = messageResponse.domain();
     email = emailPort.send(email);
 
-    var historyCreateCommand =
-        EmailSendHistorySystemCommand.CreateRequest.builder()
-            .sender(email.getSender())
-            .recipient(email.getRecipient())
-            .subject(email.getSubject())
-            .body(email.getBody())
-            .sentAt(email.getSentAt())
-            .build();
     var historyCreateMessageResponse =
-        EmailSendHistory.create(new EmailSendHistoryMessage.CreateRequest(historyCreateCommand));
+        EmailSendHistory.create(new EmailSendHistoryMessage.CreateRequest(email));
     var emailSendHistory = historyCreateMessageResponse.domain();
     emailSendHistoryRepository.create(emailSendHistory);
 

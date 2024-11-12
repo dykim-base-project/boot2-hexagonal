@@ -21,5 +21,9 @@ interface EmailFixture {
 
   static def DOMAIN__SEND_CODE_NORMAL = Email.builder()
   .sender(EMAIL_ADDRESS_SENDER)
+  .recipient(EmailSystemApiFixture.COMMAND__SEND_NORMAL.recipient())
+  .subject(EmailSystemApiFixture.COMMAND__SEND_NORMAL.subject())
+  .body(EmailSystemApiFixture.COMMAND__SEND_NORMAL.body())
+  .sentAt(NOW)
   .build()
 }

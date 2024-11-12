@@ -9,9 +9,12 @@ import com.boot2.hexagonal.api.data.EmailData;
 import com.boot2.hexagonal.api.data.ids.AuthenticationId;
 import com.boot2.hexagonal.core.configs.EmailFormatProperties;
 import com.boot2.hexagonal.core.domains.Email;
+import com.boot2.hexagonal.core.domains.EmailSendHistory;
 import com.boot2.hexagonal.core.domains.mappers.EmailMapper;
 import com.boot2.hexagonal.core.domains.messages.EmailMessage;
+import com.boot2.hexagonal.core.domains.messages.EmailSendHistoryMessage;
 import com.boot2.hexagonal.core.domains.ports.EmailPort;
+import com.boot2.hexagonal.core.domains.ports.EmailSendHistoryRepository;
 import lombok.RequiredArgsConstructor;
 import org.springframework.stereotype.Service;
 import org.springframework.validation.annotation.Validated;
@@ -23,6 +26,8 @@ public class EmailUserService implements EmailUserUseCase {
 
   private final EmailPort port;
   private final EmailMapper mapper;
+
+  private final EmailSendHistoryRepository emailSendHistoryRepository;
 
   private final AuthenticationSystemUseCase authenticationSystemUseCase;
 
@@ -40,6 +45,12 @@ public class EmailUserService implements EmailUserUseCase {
         Email.sendCode(
             new EmailMessage.SendCodeRequest(request, authenticationData, formatProperties));
     var email = port.send(messageResponse.domain());
+
+    var historyCreateMessageResponse =
+        EmailSendHistory.create(new EmailSendHistoryMessage.CreateRequest(email));
+    var emailSendHistory = historyCreateMessageResponse.domain();
+    emailSendHistoryRepository.create(emailSendHistory);
+
     return mapper.map(email);
   }
 

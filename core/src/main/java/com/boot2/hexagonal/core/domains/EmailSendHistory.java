@@ -25,14 +25,14 @@ public class EmailSendHistory {
   private ZonedDateTime sentAt;
 
   public static CreateResponse create(CreateRequest message) {
-    var request = message.request();
+    var email = message.email();
     var emailSendHistory =
         EmailSendHistory.builder()
-            .sender(request.sender())
-            .recipient(request.recipient())
-            .subject(request.subject())
-            .body(request.body())
-            .sentAt(request.sentAt())
+            .sender(email.getSender())
+            .recipient(email.getRecipient())
+            .subject(email.getSubject())
+            .body(email.getBody())
+            .sentAt(email.getSentAt())
             .build();
     var response = new CreateResponse(emailSendHistory);
     log.info("Email send history created: {}", response);
