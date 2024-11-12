@@ -42,7 +42,7 @@ jobs:
       with:
         title: 📝 jacoco test code coverage report(with.aggregation)
         paths: ${{ github.workspace }}/build/reports/jacoco/testCodeCoverageReport/testCodeCoverageReport.xml
-        token: ${{ secrets.GITHUB_TOKEN }}
+        token: ${{ secrets.PRIVATE_REPO_ACCESS_TOKEN }}
         min-coverage-overall: 50
         min-coverage-changed-files: 50
 
