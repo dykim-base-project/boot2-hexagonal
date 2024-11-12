@@ -1,8 +1,8 @@
 ---
-name: Feature request
-about: Suggest an idea for this project
-title: "[Feature] "
-labels: enhancement
+name: Fix Docs
+about: ReadMe 등 문서 수정용 템플릿
+title: "[Docs] "
+labels: documentation
 assignees: idean3885
 
 ---
