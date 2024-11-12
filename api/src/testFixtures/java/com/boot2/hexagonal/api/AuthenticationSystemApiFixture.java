@@ -39,6 +39,7 @@ public interface AuthenticationSystemApiFixture {
   AuthenticationData DATA__EMAIL_NORMAL =
       AuthenticationData.builder()
           .id(ID_EMAIL_NORMAL)
+          .type(AuthenticationTypeKind.EMAIL)
           .code(AuthenticationCode.from("test code"))
           .build();
 }

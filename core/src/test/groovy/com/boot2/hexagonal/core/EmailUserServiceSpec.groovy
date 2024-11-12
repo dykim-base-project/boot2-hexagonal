@@ -2,14 +2,11 @@ package com.boot2.hexagonal.core
 
 import com.boot2.hexagonal.api.AuthenticationSystemApiFixture
 import com.boot2.hexagonal.api.AuthenticationSystemUseCase
-import com.boot2.hexagonal.api.EmailSystemApiFixture
-import com.boot2.hexagonal.api.EmailSystemUseCase
 import com.boot2.hexagonal.api.EmailUserApiFixture
 import com.boot2.hexagonal.api.EmailUserUseCase
 import com.boot2.hexagonal.api.commands.AuthenticationSystemCommand
 import com.boot2.hexagonal.core.domains.Email
 import com.boot2.hexagonal.core.domains.ports.EmailPort
-import com.boot2.hexagonal.core.fixtures.AuthenticationFixture
 import com.boot2.hexagonal.core.fixtures.EmailFixture
 import javax.transaction.Transactional
 import org.spockframework.spring.SpringBean

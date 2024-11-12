@@ -45,10 +45,15 @@ public class Email {
   public static EmailMessage.SendCodeResponse sendCode(SendCodeRequest message) {
     var request = message.request();
     var authenticationData = message.authenticationData();
-    var subject = "[boot2-hexagonal] Authentication Code";
-    var body = "Your authentication code is " + authenticationData.code().value();
+    var format = message.formatProperties().getRequestAuthenticationCode();
+    var body = format.getBody().replace("${authenticationCode}", authenticationData.code().value());
     var email =
-        Email.builder().recipient(request.emailAddress()).subject(subject).body(body).build();
+        Email.builder()
+            .recipient(request.emailAddress())
+            .subject(format.getSubject())
+            .body(body)
+            .sentAt(ZonedDateTime.now())
+            .build();
     log.info("Send code: {}", email);
     return new EmailMessage.SendCodeResponse(email);
   }
