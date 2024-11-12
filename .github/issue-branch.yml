@@ -1,2 +1,10 @@
-branchName: '${issue.number}-issue'
+branchName: 'issue-${issue.number}'
+autoLinkIssue: true
+autoCloseIssue: true
+autoDeleteBranch: true
 #gitSafeReplacementChar: '-'
+branches:
+  - label: enhancement
+    prefix: feature/
+  - label: bug
+    prefix: bugfix/
