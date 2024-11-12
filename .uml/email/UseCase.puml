@@ -1,0 +1,30 @@
+@startuml
+
+actor 사용자 as user
+
+package "이메일 도메인" as email {
+  (이메일 전송)
+  (이메일 인증 코드 요청)
+  (이메일 유효성 검증)
+}
+
+package "이메일 발송 내역" as emailSendHistory {
+    (발송 내역 저장)
+}
+
+rectangle "사용자 이메일" as userEmail
+
+package "인증 도메인" as authentication {
+  (인증 코드 생성)
+  (인증 코드 검증)
+}
+
+user --> (이메일 인증 코드 요청)
+user -> (이메일 유효성 검증)
+(이메일 전송) --> userEmail
+(발송 내역 저장) <-- (이메일 전송)
+(이메일 유효성 검증) --> (인증 코드 검증)
+(이메일 인증 코드 요청) --> (인증 코드 생성)
+(발송 내역 저장) <- (이메일 인증 코드 요청)
+(이메일 인증 코드 요청) -> userEmail: 인증 코드 전송
+@enduml

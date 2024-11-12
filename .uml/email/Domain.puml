@@ -1,0 +1,23 @@
+@startuml
+
+class "이메일" as email {
+    이메일 도메인
+    ---
+    sender
+    recipient
+    subject
+    body
+}
+
+class "이메일 전송 기록" as email_send_history {
+    * id - bigint
+    ---
+    sender varchar(254) email_address 도메인
+    recipient varchar(254) email_address 도메인
+    subject varchar(100)
+    body varchar(255)
+    sent_at datetime(3)
+}
+
+email -{ email_send_history
+@enduml
