@@ -1,2 +1,2 @@
-branchName: 'issue/#${issue.number}'
+branchName: '#${issue.number}-issue'
 #gitSafeReplacementChar: '-'
