@@ -6,6 +6,9 @@
   * Spring boot 2 / Gradle build
   * java 17
 
+### Test
+  * Groovy / Spock Framework
+
 ### Architecture
   * Hexagonal
   * Spring multi module
