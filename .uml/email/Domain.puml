@@ -3,15 +3,18 @@
 class "이메일" as email {
     이메일 도메인
     ---
-    sender
+    type
     recipient
     subject
     body
+    sentAt
+    sender
 }
 
 class "이메일 전송 기록" as email_send_history {
     * id - bigint
     ---
+    type
     sender varchar(254) email_address 도메인
     recipient varchar(254) email_address 도메인
     subject varchar(100)

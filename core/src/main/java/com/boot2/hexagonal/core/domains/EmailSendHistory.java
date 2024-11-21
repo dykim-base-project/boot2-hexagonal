@@ -1,6 +1,7 @@
 package com.boot2.hexagonal.core.domains;
 
 import com.boot2.hexagonal.api.data.EmailAddress;
+import com.boot2.hexagonal.api.data.enums.EmailSendTypeKind;
 import com.boot2.hexagonal.api.data.ids.EmailSendHistoryId;
 import com.boot2.hexagonal.core.domains.messages.EmailSendHistoryMessage.CreateRequest;
 import com.boot2.hexagonal.core.domains.messages.EmailSendHistoryMessage.CreateResponse;
@@ -18,6 +19,7 @@ import lombok.extern.slf4j.Slf4j;
 public class EmailSendHistory {
 
   private EmailSendHistoryId id;
+  private EmailSendTypeKind sendType;
   private EmailAddress sender;
   private EmailAddress recipient;
   private String subject;
@@ -28,6 +30,7 @@ public class EmailSendHistory {
     var email = message.email();
     var emailSendHistory =
         EmailSendHistory.builder()
+            .sendType(email.getSendType())
             .sender(email.getSender())
             .recipient(email.getRecipient())
             .subject(email.getSubject())
@@ -35,7 +38,7 @@ public class EmailSendHistory {
             .sentAt(email.getSentAt())
             .build();
     var response = new CreateResponse(emailSendHistory);
-    log.info("Email send history created: {}", response);
+    log.info("EmailSendHistory created: {}", response);
     return response;
   }
 }

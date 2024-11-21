@@ -4,6 +4,7 @@ import static io.swagger.v3.oas.annotations.media.Schema.RequiredMode.REQUIRED;
 
 import com.boot2.hexagonal.api.data.AuthenticationCode;
 import com.boot2.hexagonal.api.data.EmailAddress;
+import com.boot2.hexagonal.api.data.enums.EmailSendTypeKind;
 import io.swagger.v3.oas.annotations.media.Schema;
 import javax.validation.Valid;
 import javax.validation.constraints.NotBlank;
@@ -15,6 +16,7 @@ public interface EmailSystemCommand {
   @Schema(description = "전송 요청")
   @Builder(toBuilder = true)
   record SendRequest(
+      @Schema(description = "전송 타입", requiredMode = REQUIRED) @NotNull EmailSendTypeKind sendType,
       @Schema(description = "수신자", requiredMode = REQUIRED) @NotNull @Valid EmailAddress recipient,
       @Schema(description = "제목", requiredMode = REQUIRED) @NotBlank String subject,
       @Schema(description = "내용", requiredMode = REQUIRED) @NotBlank String body) {}

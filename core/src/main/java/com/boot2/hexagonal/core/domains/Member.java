@@ -1,7 +1,7 @@
 package com.boot2.hexagonal.core.domains;
 
 import com.boot2.hexagonal.api.data.EmailAddress;
-import com.boot2.hexagonal.api.data.MemberStatusKind;
+import com.boot2.hexagonal.api.data.enums.MemberStatusKind;
 import com.boot2.hexagonal.api.data.ids.MemberId;
 import com.boot2.hexagonal.core.domains.messages.MemberMessage.CreateRequest;
 import com.boot2.hexagonal.core.domains.messages.MemberMessage.CreateResponse;
@@ -39,7 +39,7 @@ public class Member {
                 .createdAt(now)
                 .modifiedAt(now)
                 .build());
-    log.info("email created: {}", response);
+    log.info("Member created: {}", response);
     return response;
   }
 }

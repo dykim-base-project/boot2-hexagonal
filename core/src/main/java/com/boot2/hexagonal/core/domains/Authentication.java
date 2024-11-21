@@ -1,7 +1,7 @@
 package com.boot2.hexagonal.core.domains;
 
 import com.boot2.hexagonal.api.data.AuthenticationCode;
-import com.boot2.hexagonal.api.data.AuthenticationTypeKind;
+import com.boot2.hexagonal.api.data.enums.AuthenticationTypeKind;
 import com.boot2.hexagonal.api.data.ids.AuthenticationId;
 import com.boot2.hexagonal.api.exceptions.AuthenticationInvalidException;
 import com.boot2.hexagonal.core.domains.messages.AuthenticationMessage;
@@ -37,7 +37,7 @@ public class Authentication {
             .type(request.type())
             .code(AuthenticationCode.from(generateRandomNum(6)))
             .build();
-    log.info("Create authentication: {}", authentication);
+    log.info("Authentication created: {}", authentication);
     return new AuthenticationMessage.CreateResponse(authentication);
   }
 
@@ -47,7 +47,7 @@ public class Authentication {
       log.error("Invalid authentication code: {}", request);
       throw new AuthenticationInvalidException();
     }
-    log.info("Validate authentication code: {}", this);
+    log.info("Authentication valid: {}", this);
   }
 
   @SneakyThrows

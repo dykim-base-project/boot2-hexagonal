@@ -4,6 +4,7 @@ import com.boot2.hexagonal.api.commands.EmailSystemCommand;
 import com.boot2.hexagonal.api.data.AuthenticationCode;
 import com.boot2.hexagonal.api.data.EmailAddress;
 import com.boot2.hexagonal.api.data.EmailData;
+import com.boot2.hexagonal.api.data.enums.EmailSendTypeKind;
 import java.time.ZonedDateTime;
 
 public interface EmailSystemApiFixture {
@@ -12,6 +13,7 @@ public interface EmailSystemApiFixture {
 
   EmailSystemCommand.SendRequest COMMAND__SEND_NORMAL =
       EmailSystemCommand.SendRequest.builder()
+          .sendType(EmailSendTypeKind.NORMAL)
           .recipient(EmailAddress.from("test@email.com"))
           .subject("test subject")
           .body("test body")

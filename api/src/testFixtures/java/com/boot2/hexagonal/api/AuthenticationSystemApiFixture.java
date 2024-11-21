@@ -3,8 +3,8 @@ package com.boot2.hexagonal.api;
 import com.boot2.hexagonal.api.commands.AuthenticationSystemCommand;
 import com.boot2.hexagonal.api.data.AuthenticationCode;
 import com.boot2.hexagonal.api.data.AuthenticationData;
-import com.boot2.hexagonal.api.data.AuthenticationTypeKind;
 import com.boot2.hexagonal.api.data.EmailAddress;
+import com.boot2.hexagonal.api.data.enums.AuthenticationTypeKind;
 import com.boot2.hexagonal.api.data.ids.AuthenticationId;
 
 public interface AuthenticationSystemApiFixture {

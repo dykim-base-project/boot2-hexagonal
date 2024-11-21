@@ -1,15 +1,22 @@
 @startuml
 
+package "이메일 도메인" as email {
+  (이메일 인증 코드 요청) as requestEmailAuthCode
+  (이메일 유효성 검증) as validateEmail
+}
+
 package "인증 도메인" {
-  (인증 코드 생성)
-  (인증 코드 검증)
+  (인증 코드 생성) as createAuthCode
+  (인증 코드 검증) as validateAuthCode
 }
 
 package "인증 이력 도메인" {
-  (인증 이력 저장)
+  (인증 이력 저장) as createAuthHistory
 }
 
+requestEmailAuthCode --> createAuthCode
+validateEmail --> validateAuthCode
 
-(인증 코드 생성) --> (인증 이력 저장)
-(인증 코드 검증) --> (인증 이력 저장)
+createAuthCode --> createAuthHistory
+validateAuthCode --> createAuthHistory
 @enduml

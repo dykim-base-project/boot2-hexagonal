@@ -1,6 +1,6 @@
 package com.boot2.hexagonal.core.adapters.jpa.entities;
 
-import com.boot2.hexagonal.api.data.AuthenticationTypeKind;
+import com.boot2.hexagonal.api.data.enums.AuthenticationTypeKind;
 import com.boot2.hexagonal.api.data.ids.AuthenticationId;
 import com.boot2.hexagonal.api.data.ids.WorkerId;
 import java.time.ZonedDateTime;
