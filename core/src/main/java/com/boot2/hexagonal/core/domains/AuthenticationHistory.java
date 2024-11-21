@@ -1,6 +1,6 @@
 package com.boot2.hexagonal.core.domains;
 
-import com.boot2.hexagonal.api.data.AuthenticationTypeKind;
+import com.boot2.hexagonal.api.data.enums.AuthenticationTypeKind;
 import com.boot2.hexagonal.api.data.ids.AuthenticationHistoryId;
 import com.boot2.hexagonal.api.data.ids.AuthenticationId;
 import com.boot2.hexagonal.api.data.ids.WorkerId;
@@ -42,7 +42,7 @@ public class AuthenticationHistory {
             .createdAt(ZonedDateTime.now())
             .build();
     var response = new AuthenticationHistoryMessage.CreateResponse(authenticationHistory);
-    log.info("Authentication history created: {}", response);
+    log.info("AuthenticationHistory created: {}", response);
     return response;
   }
 }

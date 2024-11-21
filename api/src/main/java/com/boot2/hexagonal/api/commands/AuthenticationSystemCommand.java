@@ -1,7 +1,7 @@
 package com.boot2.hexagonal.api.commands;
 
 import com.boot2.hexagonal.api.data.AuthenticationCode;
-import com.boot2.hexagonal.api.data.AuthenticationTypeKind;
+import com.boot2.hexagonal.api.data.enums.AuthenticationTypeKind;
 import com.boot2.hexagonal.api.data.ids.AuthenticationId;
 import io.swagger.v3.oas.annotations.media.Schema;
 import javax.validation.Valid;

@@ -1,6 +1,7 @@
 package com.boot2.hexagonal.core.adapters.jpa.entities;
 
 import com.boot2.hexagonal.api.data.EmailAddress;
+import com.boot2.hexagonal.api.data.enums.EmailSendTypeKind;
 import java.time.ZonedDateTime;
 import javax.persistence.*;
 import lombok.Data;
@@ -18,6 +19,11 @@ public class EmailSendHistoryEntity {
   @Id
   @GeneratedValue(strategy = GenerationType.IDENTITY)
   private Long id;
+
+  @Comment("전송 타입")
+  @Enumerated(EnumType.STRING)
+  @Column(nullable = false, length = EmailSendTypeKind.LENGTH)
+  private EmailSendTypeKind sendType;
 
   @Comment("발신자")
   @Column(nullable = false, length = EmailAddress.MAX_LENGTH)

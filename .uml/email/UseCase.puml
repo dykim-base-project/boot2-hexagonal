@@ -2,29 +2,34 @@
 
 actor 사용자 as user
 
+package "회원 도메인" as member {
+  (회원 가입) as signup
+}
+
 package "이메일 도메인" as email {
-  (이메일 전송)
-  (이메일 인증 코드 요청)
-  (이메일 유효성 검증)
+  (이메일 전송) as sendEmail
+  (이메일 인증 코드 요청) as requestEmailAuthCode
+  (이메일 유효성 검증) as validateEmail
 }
 
 package "이메일 발송 내역" as emailSendHistory {
-    (발송 내역 저장)
+    (발송 내역 저장) as createEmailSendHistory
 }
 
 rectangle "사용자 이메일" as userEmail
 
 package "인증 도메인" as authentication {
-  (인증 코드 생성)
-  (인증 코드 검증)
+  (인증 코드 생성) as createAuthCode
+  (인증 코드 검증) as validateAuthCode
 }
 
-user --> (이메일 인증 코드 요청)
-user -> (이메일 유효성 검증)
-(이메일 전송) --> userEmail
-(발송 내역 저장) <-- (이메일 전송)
-(이메일 유효성 검증) --> (인증 코드 검증)
-(이메일 인증 코드 요청) --> (인증 코드 생성)
-(발송 내역 저장) <- (이메일 인증 코드 요청)
-(이메일 인증 코드 요청) -> userEmail: 인증 코드 전송
+signup -> validateEmail
+user --> requestEmailAuthCode
+user -> validateEmail
+sendEmail --> userEmail: html 전송
+createEmailSendHistory <-- sendEmail
+validateEmail --> validateAuthCode
+requestEmailAuthCode --> createAuthCode
+requestEmailAuthCode -> sendEmail: 인증 코드 전송
+
 @enduml

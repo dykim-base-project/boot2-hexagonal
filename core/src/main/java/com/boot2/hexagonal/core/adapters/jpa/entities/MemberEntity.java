@@ -1,7 +1,7 @@
 package com.boot2.hexagonal.core.adapters.jpa.entities;
 
 import com.boot2.hexagonal.api.data.EmailAddress;
-import com.boot2.hexagonal.api.data.MemberStatusKind;
+import com.boot2.hexagonal.api.data.enums.MemberStatusKind;
 import java.time.ZonedDateTime;
 import javax.persistence.Column;
 import javax.persistence.Entity;
@@ -34,6 +34,14 @@ public class MemberEntity {
   @GeneratedValue(strategy = GenerationType.IDENTITY)
   private Long id;
 
+  @Comment("이름")
+  @Column(nullable = false, length = 20)
+  private String name;
+
+  @Comment("비밀번호")
+  @Column(nullable = false, length = 50)
+  private String password;
+
   @Comment("이메일 주소")
   @Column(name = "email_address", nullable = false, length = EmailAddress.MAX_LENGTH)
   private String emailAddress;
@@ -41,18 +49,13 @@ public class MemberEntity {
   @Comment("이메일 검증 여부")
   private boolean emailValidated;
 
-  @Comment("비밀번호")
-  private String password;
-
-  @Comment("이름")
-  private String name;
-
   @Comment("상태")
   @Enumerated(EnumType.STRING)
+  @Column(nullable = false, length = MemberStatusKind.LENGTH)
   private MemberStatusKind status;
 
   @Comment("생성 일시")
-  @Column(nullable = false, columnDefinition = "datetime(3)")
+  @Column(nullable = false, updatable = false, columnDefinition = "datetime(3)")
   private ZonedDateTime createdAt;
 
   @Comment("수정 일시")

@@ -1,5 +1,6 @@
 package com.boot2.hexagonal.api.data;
 
+import com.boot2.hexagonal.api.data.enums.EmailSendTypeKind;
 import io.swagger.v3.oas.annotations.media.Schema;
 import java.time.ZonedDateTime;
 import lombok.Builder;
@@ -7,6 +8,7 @@ import lombok.Builder;
 @Schema(description = "이메일 데이터")
 @Builder
 public record EmailData(
+    @Schema(description = "전송 타입") EmailSendTypeKind sendType,
     @Schema(description = "발신자") EmailAddress sender,
     @Schema(description = "수신자") EmailAddress recipient,
     @Schema(description = "제목") String subject,

@@ -4,7 +4,7 @@ import com.boot2.hexagonal.api.commands.MemberUserCommand;
 import com.boot2.hexagonal.api.data.AuthenticationCode;
 import com.boot2.hexagonal.api.data.EmailAddress;
 import com.boot2.hexagonal.api.data.MemberData;
-import com.boot2.hexagonal.api.data.MemberStatusKind;
+import com.boot2.hexagonal.api.data.enums.MemberStatusKind;
 import com.boot2.hexagonal.api.data.ids.MemberId;
 import java.time.ZonedDateTime;
 

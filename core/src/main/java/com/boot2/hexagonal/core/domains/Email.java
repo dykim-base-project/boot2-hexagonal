@@ -1,6 +1,7 @@
 package com.boot2.hexagonal.core.domains;
 
 import com.boot2.hexagonal.api.data.EmailAddress;
+import com.boot2.hexagonal.api.data.enums.EmailSendTypeKind;
 import com.boot2.hexagonal.core.domains.messages.EmailMessage;
 import com.boot2.hexagonal.core.domains.messages.EmailMessage.SendCodeRequest;
 import com.boot2.hexagonal.core.domains.messages.EmailMessage.SendRequest;
@@ -22,6 +23,7 @@ import lombok.extern.slf4j.Slf4j;
 @AllArgsConstructor
 public class Email {
 
+  private EmailSendTypeKind sendType;
   private EmailAddress recipient;
   private String subject;
   private String body;
@@ -32,6 +34,7 @@ public class Email {
     var request = message.request();
     var email =
         Email.builder()
+            .sendType(request.sendType())
             .recipient(request.recipient())
             .subject(request.subject())
             .body(request.body())
@@ -49,12 +52,13 @@ public class Email {
     var body = format.getBody().replace("${authenticationCode}", authenticationData.code().value());
     var email =
         Email.builder()
+            .sendType(EmailSendTypeKind.AUTHENTICATION_CODE)
             .recipient(request.emailAddress())
             .subject(format.getSubject())
             .body(body)
             .sentAt(ZonedDateTime.now())
             .build();
-    log.info("Send code: {}", email);
+    log.info("Email sendCode: {}", email);
     return new EmailMessage.SendCodeResponse(email);
   }
 }
