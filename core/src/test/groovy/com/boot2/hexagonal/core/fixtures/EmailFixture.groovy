@@ -12,7 +12,7 @@ interface EmailFixture {
   static final def EMAIL_ADDRESS_SENDER = EmailAddress.from("sender@email.com")
 
   static def DOMAIN__SEND_NORMAL = Email.builder()
-  .sendType(EmailSendTypeKind.NORMAL)
+  .sendType(EmailSendTypeKind.MANUAL)
   .sender(EMAIL_ADDRESS_SENDER)
   .recipient(EmailSystemApiFixture.COMMAND__SEND_NORMAL.recipient())
   .subject(EmailSystemApiFixture.COMMAND__SEND_NORMAL.subject())

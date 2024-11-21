@@ -13,7 +13,7 @@ public interface EmailSystemApiFixture {
 
   EmailSystemCommand.SendRequest COMMAND__SEND_NORMAL =
       EmailSystemCommand.SendRequest.builder()
-          .sendType(EmailSendTypeKind.NORMAL)
+          .sendType(EmailSendTypeKind.MANUAL)
           .recipient(EmailAddress.from("test@email.com"))
           .subject("test subject")
           .body("test body")
