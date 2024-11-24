@@ -4,24 +4,28 @@
 # 프로젝트 스펙
 #### 스킬 셋
   * Spring boot 2 / Gradle build
-  * java 17
+  * Java 17
 
 #### 테스트
-  * Groovy / Spock Framework
+  * Groovy4 / Spock Framework
 
 #### 아키텍쳐
   * Hexagonal
   * Spring multi module
 
-#### 멀티 모듈 구조
+#### 멀티 모듈 구조 설명
   * api
-    * useCase - input port
+    * input port 모듈
+    * useCase 정의(UseCase 인터페이스)
   * core
-    * domain - business logic
-    * repository - output port
-    * adapter - output adapter
+    * 도메인, output port/adapter 모듈
+    * useCase 구현(Service 클래스)
+    * 도메인 구현(domains 패키지)
+    * output port 정의(domains.ports 패키지)
+    * output adapter 구현(adapters 패키지)
   * server 
-    * input adapter
+    * input adapter 구현 모듈
+    * server 방식으로 구현(Spring Boot MVC)
 
 #### 기타
   * flyway
