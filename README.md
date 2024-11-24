@@ -2,30 +2,31 @@
 스프링 부트2 헥사고날 아키텍쳐 프로젝트
 
 # 프로젝트 스펙
-### Skill set
+#### 스킬 셋
   * Spring boot 2 / Gradle build
   * java 17
 
-### Test
+#### 테스트
   * Groovy / Spock Framework
 
-### Architecture
+#### 아키텍쳐
   * Hexagonal
   * Spring multi module
 
-### Multi modules spec
+#### 멀티 모듈 구조
   * api
-    * UseCase - input port
+    * useCase - input port
   * core
-    * Domain - business logic
-    * Adapter - output port
+    * domain - business logic
+    * repository - output port
+    * adapter - output adapter
   * server 
-    * boot server
+    * input adapter
 
-### etc
+#### 기타
   * flyway
     * database migration
-    * sql validate
+    * DDL sql validate
   * uml
     * UseCase, Sequence, Domain
   * github
