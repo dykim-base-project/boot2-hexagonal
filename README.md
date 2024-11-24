@@ -17,6 +17,9 @@
   * api
     * input port 모듈
     * useCase 정의(UseCase 인터페이스)
+    * 특이사항 - 도메인 id record
+      * id 에 대한 명세, Validation 을 record 로 설정하여 관리함.
+      * 값이 아닌 자료형 자체로 해당 도메인을 구분할 수 있다는 장점이 있음.
   * core
     * 도메인, output port/adapter 모듈
     * useCase 구현(Service 클래스)
@@ -44,31 +47,31 @@
 
 ## 1. 회원
 ### Sequence
-![회원 Sequence](http://www.plantuml.com/plantuml/proxy?src=https://raw.githubusercontent.com/dykim-base-project/boot2-hexagonal/main/.uml/member/Sequence.puml)
+![회원 Sequence](https://github.com/user-attachments/assets/7a885fe3-f859-4769-a7c6-775142aaf512)
 
 ### UseCase
-![회원 UseCase](http://www.plantuml.com/plantuml/proxy?src=https://raw.githubusercontent.com/dykim-base-project/boot2-hexagonal/main/.uml/member/UseCase.puml)
+![회원 Use](https://github.com/user-attachments/assets/2fb426f7-548e-4cbd-a22e-d100e66d658e)
 
 ### Domain
-![회원 Domain](http://www.plantuml.com/plantuml/proxy?src=https://raw.githubusercontent.com/dykim-base-project/boot2-hexagonal/main/.uml/member/Domain.puml)
+![회원 Domain](https://github.com/user-attachments/assets/5f75ba11-feb5-42b0-8377-34af9d859423)
 
 ## 2. 이메일
 ### Sequence
-![이메일 Sequence](http://www.plantuml.com/plantuml/proxy?src=https://raw.githubusercontent.com/dykim-base-project/boot2-hexagonal/main/.uml/email/Sequence.puml)
+![이메일 Sequence](https://github.com/user-attachments/assets/57c122cc-1128-4936-bc46-4257bdac0f0e)
 
 ### UseCase
-![이메일 UseCase](http://www.plantuml.com/plantuml/proxy?src=https://raw.githubusercontent.com/dykim-base-project/boot2-hexagonal/main/.uml/email/UseCase.puml)
+![이메일 UseCase](https://github.com/user-attachments/assets/28f965d1-e4ba-4328-9521-6dc19a5364cc)
 
 ### Domain
-![이메일 Domain](http://www.plantuml.com/plantuml/proxy?src=https://raw.githubusercontent.com/dykim-base-project/boot2-hexagonal/main/.uml/email/Domain.puml)
+![이메일 Domain](https://github.com/user-attachments/assets/b4e80e93-1c7e-486c-ac35-980ca1986cc2)
 
 ## 3. 인증
 ### Sequence
-![인증 Sequence](http://www.plantuml.com/plantuml/proxy?src=https://raw.githubusercontent.com/dykim-base-project/boot2-hexagonal/main/.uml/authentication/Sequence.puml)
+![인증 Sequence](https://github.com/user-attachments/assets/cdaeca92-2c8a-42a6-a9a4-2a18217fe0ba)
 
 ### UseCase
-![인증 UseCase](http://www.plantuml.com/plantuml/proxy?src=https://raw.githubusercontent.com/dykim-base-project/boot2-hexagonal/main/.uml/authentication/UseCase.puml)
+![인증 UseCase](https://github.com/user-attachments/assets/a9387f3f-3d10-4d76-af5c-2aabba74daea)
 
 ### Domain
-![인증 Domain](http://www.plantuml.com/plantuml/proxy?src=https://raw.githubusercontent.com/dykim-base-project/boot2-hexagonal/main/.uml/authentication/Domain.puml)
+![인증 Domain](https://github.com/user-attachments/assets/2393ccaa-db87-4849-a2a2-99edd1b8bda4)
 
