@@ -15,28 +15,27 @@
   * Spring multi module
 
 #### 멀티 모듈 구조 설명
-  * api
-    * input port 모듈
+  * api 모듈 - input port
     * useCase 정의(UseCase 인터페이스)
     * 특이사항 - 도메인 id record
       * id 에 대한 명세, Validation 을 record 로 설정하여 관리함.
       * 값이 아닌 자료형 자체로 해당 도메인을 구분할 수 있다는 장점이 있음.
-  * core
-    * 도메인, output port/adapter 모듈
+  * core 모듈 - output port, adapter
     * useCase 구현(Service 클래스)
     * 도메인 구현(domains 패키지)
     * output port 정의(domains.ports 패키지)
     * output adapter 구현(adapters 패키지)
-  * server 
-    * input adapter 구현 모듈
+  * server 모듈 - input adapter
     * server 방식으로 구현(Spring Boot MVC)
 
 #### 이슈 & 브랜치 관리
 1. 이슈 생성
    * 깃허브에서 이슈 템플릿으로 이슈를 생성합니다.
    * 생성 시, 이슈 브랜치가 자동 생성됩니다.(GitHub Action create-issue-branch)
-2. 브랜치 병합
-   * 생성된 브랜치에 작업 후 PR 생성할 경우 프로젝트 빌드 테스트를 진행합니다. (GitHub Action gradle-build)
+2. PR 생성
+   * PR 생성 시 빌드 및 테스트 커버리지를 기록합니다. (GitHub Action pr-build-test-coverage-report.yml)
+3. PR 병합
+   * 병합 시, main 브랜치 기준 프로젝트 빌드 테스트를 진행합니다. (GitHub Action main-build.yml) 
 
 #### 기타
   * .flyway
@@ -48,8 +47,12 @@
     * 깃허브 설정용 디렉토리
     * issue template - 이슈 작성용 markdown 템플릿
     * workflows - gitHub action
-      * create-issue-branch: 이슈 작성 시 브랜치 자동 생성
-      * gradle-build: main 브랜치로 PR 또는 main 푸시할 경우 gradle build 테스트 수행
+      * create-issue-branch
+        * 이슈 작성 시 브랜치 자동 생성
+        * PR 생성 시 이슈와 자동 연결
+      * build-test-coverage-report
+        * main 브랜치로 PR 또는 main 푸시할 경우 gradle build 테스트 수행
+        * jacoco test coverage report 코멘트 생성
 
 # 도메인 별 명세서
 [//]: # (주소 기준 캐싱되므로 변경 시, plantUML 온라인 서버 또는 기타 방법으로 이미지를 복사하여 github 이미지 캐시로 업데이트할 것)
