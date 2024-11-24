@@ -1,9 +1,5 @@
 @startuml
 
-class "인증 id Record" as authentication_id {
-  * email_address
-}
-
 enum "인증 타입" as authentication_type {
   EMAIL
 }
@@ -26,7 +22,6 @@ class "인증 기록" as authentication_history {
 }
 
 authentication_type <. authentication
-authentication_id <.. authentication
 authentication -{ authentication_history
 
 'class "권한" {
