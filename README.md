@@ -54,36 +54,15 @@
         * main 브랜치로 PR 또는 main 푸시할 경우 gradle build 테스트 수행
         * jacoco test coverage report 코멘트 생성
 
-# 도메인 별 명세서
+# 명세서
 [//]: # (주소 기준 캐싱되므로 변경 시, plantUML 온라인 서버 또는 기타 방법으로 이미지를 복사하여 github 이미지 캐시로 업데이트할 것)
 
-## 1. 회원
-### Sequence
-![회원 Sequence](https://github.com/user-attachments/assets/7a885fe3-f859-4769-a7c6-775142aaf512)
+## Sequence
+![Sequence](https://www.plantuml.com/plantuml/png/nLNDJjjS4DtxAQxoRK0etmD41D6gtNR3ikh24AkDb1_asApxuo9KWWGY5JID8wAcLP6ev2P1PG4lb3jvXqxYoOtdrd5YHMfta7lcPywSETwkEQRjkEMIOUuvLLjauEqDDA-XVPeHPasuDSiszX5Ht2lkcnL7P4RDEdmE7yjMULT_1dyWhnlWtmlmx-2RFm5QPRDOUkGwhpXsvzbE55Mhr98m0hoMx7bHw8vb7-WDgFw5QaLDydJSXr4m7NFNh5aYy-JnvAcmQnZvV7uM86J_3ejE2m_xzt3rKUJpXkawrOexcNgSJsItPhFbX3wxaBsZqIMcQJQWzyCmIuuXn4kxwkv7e66_0hfduuh3tWCq0uIfj2ARVVwVRHLUR4r6o8dDlMgfQkVmfwsuB9ZwJ1xV6bQbOAWal56zlRO7noq1xtpmVl8OHTeVCLSU77OO66cCK408CRmBPCV7_rv3-siKJzdZ4oCF0R8-dMKPiedbjGsUS3sf9giIQY2KjnW6sE_xjOEY-V-iqdgy1EWESZnsRZyXUi4qj8quwN1jmd5tLF-EZ_egw8KlO5bXiUGHHStJCC4x0sZVfEXbGk1cs4KsEmlZlNJFPF-MMENgvbNcahX1VsZrQH6Rl3A58do8LQaSGQaExHazGVO7E7M0Ft1cRbimEAAMsLad9QAsSBHOZH1Q7ShH9SQHG6Au8D6T1CZAo0lWuZGsGIXYpe7YMd6WpaDsMiDVO_sbF0qLHmqlkW8TltZPSNlGIH1mSIW_D9ZBhdWqL08JWrzFuRsZmwlH6sp8w-8Iec15sb9IL3pnbjLMunRmoPDVwejC3x-xsavrPX4juA4XpriOVoBFVNoShfs-ppaDHxiKqtU4ya_vt00rJp9SqR-iDxDuycO-0HAnq9C9n4qGCwItG5Lshklnj37jRSotEPMTI-gVsPkYETdS4BIQjM62bCQ6jAvWQKmyEYvfW-ajR2MP9TWNlz04w-BrYTh54lmxvhQDexZbqcy0)
 
-### UseCase
-![회원 Use](https://github.com/user-attachments/assets/2fb426f7-548e-4cbd-a22e-d100e66d658e)
+## UseCase
+![UseCase](https://www.plantuml.com/plantuml/png/XPDDIiD05CVtESNGJNNX5QGYRjtq06LCXXZCHyaaRgHGQXKNBWGhIcrAkn4A2h48Tg4NIfztC3FFC1acuAQTpl_ttlzzJ3iyeN6I1hvbKJk9OjA2qIjCLp2_Qn7AISfPR5bzQfzHbv7Mp_GMdb49M732Od9X4RA3rwJ8Xp2_sXKgzzmmxGjjkvmLdnl8DlBUZrmlj0QrbAK2Bnc1nxnOvp8pJPFJdXs58PCLcGu4Osf6FH6ZkTKOD4L4T_xOhYQGVVsnqfm5rFCbYyPLUT-JxVsCm68CrqiqPg5pK6A7aSCGrBEHOZsi2ZYdlkVGX1s9v2AeCG0kCnY_om0xPl_ZoxoSYiHTbYYstGZVFC7YGS9fNo-bcH-zmM8cUOVvJF7w2Bl7tVhmUCXherEYsLetvDYOmeoMAgQjGMOh9jVKWk86bdZLP6zVto5UbhVcjbG0Fcly4h3s_cfdeHbRD7Hj5Ae0_9F8J_KRBTHHAFhYJQrAtIdxJ0F_5m00)
 
-### Domain
-![회원 Domain](https://github.com/user-attachments/assets/5f75ba11-feb5-42b0-8377-34af9d859423)
-
-## 2. 이메일
-### Sequence
-![이메일 Sequence](https://github.com/user-attachments/assets/57c122cc-1128-4936-bc46-4257bdac0f0e)
-
-### UseCase
-![이메일 UseCase](https://github.com/user-attachments/assets/28f965d1-e4ba-4328-9521-6dc19a5364cc)
-
-### Domain
-![이메일 Domain](https://github.com/user-attachments/assets/b4e80e93-1c7e-486c-ac35-980ca1986cc2)
-
-## 3. 인증
-### Sequence
-![인증 Sequence](https://github.com/user-attachments/assets/cdaeca92-2c8a-42a6-a9a4-2a18217fe0ba)
-
-### UseCase
-![인증 UseCase](https://github.com/user-attachments/assets/a9387f3f-3d10-4d76-af5c-2aabba74daea)
-
-### Domain
-![인증 Domain](https://github.com/user-attachments/assets/2393ccaa-db87-4849-a2a2-99edd1b8bda4)
+## Domain
+![Domain](https://www.plantuml.com/plantuml/png/fLHVIzjG57_FfpZqfNKimRctiQbbblrHh4m7srE8pTK6cxHBRhQ921KgZDanXPQvsRW9GoS8wx1g1twYt9lli6DkpUxQuP2zz9vxJiuvlpz9nprgkDItIuf27Dy6mwT5tIQqM3PXHG6u_oINdSjXy7HcGWGJkQbS74pb7poQLbOLfL0oF0zIFEYmmmOFpe47NRuVfC3mWDY6LT8lfiRZRe1bug6gAlxQn9udhXvdUi-Pfaiy3-yL7Fcgx9fNp8UmssPx_MlqekNHihkSh0CLvgr5ow5NxSL6SPVuuytp2mM1noKlVE9HtQhW1O4jNGuekCIWnDGDYb0bjkhANq0fWodGj55vQy-7rEpqh3xtV2ONq_CSJwVB5HAJcinEPlCAOACcgOFFoxfZnxzLJ-QAKEHSie0U57LQNYAET2UlAvOhY0vkbTqGow_lHT8sWEt_J4caGA6JeKbILLS6y8hg5IOb_ADFTRwp6PCMJ6AgVMGpZsUoy704MBtAWoqUr82tQb6p0xxZMOiECU7PKDmb905m39l0IyCj50qtCp8iYXurgE_rfMMgO690BPjaRekINJQj1MkW9jd7zbhXMHSDbDqhbH7qzQoJdUXJ_yzfgsglJH47tDKqI0rhsgsKzBb8nT_cA4gwXpeyhKVDLWgXfG40iOaJKOb0rE7UA2H_6RfuIMzA6VQzUvcy-DP4F2OcyBTVeqQD7Qm1tsX5Qvji_oZQQADQ49uSHTjetZPV_yQ3kWQiqMR1UTYkikCEtztKCknzBTw0qpl0cpMsKGz_j25iV-H1bRt3wApBFX-nmywGaaOhqZ2NdyZV0NxQY7Pgm7Ut-8TruDjl-9ScKfRVCxMFkSZ60aYy1_KuERx04dQguN4DelKwtbYt4VwiyuFgM0nYd3YcRvT-0G00)
 
