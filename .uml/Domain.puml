@@ -1,98 +1,50 @@
 @startuml
-
-enum auth_method {
-  CREATE
-  UPDATE
-  DELETE
-  LOGIN
-}
-
-class "이메일 인증" as email_auth {
-  * id
-  ---
-  member_id
-  email_address
-  password
-}
-
-class "이메일 인증 기록" as email_auth_history {
-  * id - bigint
-  ---
-  member_id
-  email_auth_id
-  auth_method
-  success
-  request_ip
-  worker_id
-  created_at
-}
-email_auth -{ email_auth_history
-email_auth_history ..> auth_method
-
-enum "SNS_TYPE" as sns_type {
-  KAKAO
-  ...
-}
-
-class "SNS 인증" as sns_auth {
-  * id
-  ---
-  member_id
-  sns_type
-  sns_id
-  refresh_token
-  refresh_expired_at
-}
-
-class "SNS 인증 기록" as sns_auth_history {
-  * id - bigint
-  ---
-  member_id
-  sns_auth_id
-  sns_type
-  auth_method
-  success
-  request_ip
-  worker_id
-  created_at
-}
-sns_auth .> sns_type
-sns_auth --{ sns_auth_history
-sns_auth_history ..> auth_method
+'https://plantuml.com/class-diagram
 
 class "회원" as member {
-    * id - bigint(JPA H2 대응을 위해 unsigned X)
-    ---
-    name varchar(20)
-    status varchar(20)
-    created_at datetime(3)
-    modified_at datetime(3)
-}
-
-class "로그인 기록" as login_history {
-  * id - bigint
+  id
   ---
-  member_id
-  request_ip
-  created_at
+  SNS 이메일 [인증과 연동, 변경 불가]
+  상태 [회원, 탈퇴]
+  생성 일시
+  생성 id
+  수정 일시
+  수정 id
 }
-login_history }- member
-member <.. "0..1" email_auth
-member <..{ sns_auth
 
-'class "권한" {
-'    id
-'    ---
-'    권한 => 이메일_인증, 이메일_미인증, SNS_인증?
-'    스프링 시큐리티로 구현하셨음. 따라가보자.(도메인이 아닌거 같은데 그러면)
-'}
+class "로그인 기록" as loginHistory {
+  id
+  ---
+  회원 id
+  인증 타입
+  SNS 이메일
+  로그인 ip
+  상태 [성공, 실패]
+  생성 일시
+  생성 id
+}
 
-' TODO: 추후 작업 예정
-'class "회원-권한" {
-'    회원 id
-'    권한 id
-'    ---
-'    굳이 관계 테이블까지?
-'}
+class "인증" as auth {
+  회원 번호
+  인증 타입[KAKAO, GOOGLE, NAVER]
+  ---
+  리프레시 토큰
+  SNS 이메일
+  생성 일시
+  생성 id
+  수정 일시
+  수정 id
+}
+
+class "인증 기록" as authHistory {
+  id
+  ---
+  회원 번호
+  인증 타입
+  SNS 이메일
+  상태 [성공, 실패]
+  생성 일시
+  생성 id
+}
 
 @enduml

@@ -1,0 +1,42 @@
+@startuml
+
+actor "사용자" as user
+
+package "회원" as member {
+  (회원 가입) as signup
+  (로그인) as login
+}
+
+package "인증 연결" as auth_connector {
+  (회원 가입 인증) as signup_auth
+  (로그인 인증) as login_auth
+}
+
+package "이메일 인증" as email_auth {
+  (인증 코드 전송) as sendAuthCode
+  (이메일 인증 검증) as validateEmailAuth
+  (이메일 인증 생성) as createEmailAuth
+  (이메일 인증 조회) as getEmailAuth
+'  (이메일 인증 수정) as updateEmailAuth
+'  (이메일 인증 삭제) as deleteEmailAuth
+}
+
+package "SNS 인증" as sns_auth {
+  (SNS 인증 생성) as createSnsAuth
+  (SNS 인증 조회) as getSnsAuth
+'  (SNS 인증 수정) as updateSnsAuth
+'  (SNS 인증 삭제) as deleteSnsAuth
+}
+user -> sendAuthCode
+user --> validateEmailAuth
+
+user -> signup
+signup --> signup_auth
+signup_auth --> createEmailAuth
+signup_auth --> createSnsAuth
+
+user --> login
+login --> login_auth
+login_auth --> getEmailAuth
+login_auth --> getSnsAuth
+@enduml

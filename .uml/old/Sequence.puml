@@ -1,0 +1,108 @@
+@startuml
+actor "사용자" as user
+participant "회원" as member
+participant "이메일 인증" as emailAuth
+participant "SNS 인증" as snsAuth
+participant "SNS 인증 서버" as snsAuthServer
+participant "사용자 이메일" as userEmail
+database "DB" as db
+
+=== 이메일 본인 인증 과정 ==
+autonumber
+user -> emailAuth: 이메일 인증 번호 요청
+alt
+  group 이메일 사용 중인 경우
+  emailAuth --[#red]> user: <color:red>이메일 사용 중 응답
+end
+emailAuth -> emailAuth: 인증 번호 임시 생성
+emailAuth -> userEmail: 인증 번호 전송
+emailAuth -> db: 이메일 전송 기록 저장
+emailAuth --> user: 인증 번호 전송 결과 응답
+
+user -> emailAuth: 이메일 인증 요청(+ 인증 번호)
+emailAuth --> user: 인증 결과 응답
+
+=== 회원 가입(via. 이메일) ==
+autonumber
+user -> member: 회원 가입 요청(+ 인증 번호)
+member -> emailAuth: 이메일 인증 생성 요청
+alt
+  group 본인 인증 실패
+  emailAuth -> db: 실패 기록 저장
+  emailAuth --[#red]> user: <color:red>인증 실패 응답
+end
+alt
+  group 이메일 인증 존재
+  emailAuth -> db: 실패 기록 저장
+  user <[#red]-- emailAuth: <color:red>중복 가입 응답
+end
+emailAuth -> db: 이메일 인증 생성 + 생성 기록 저장
+member <-- emailAuth: 인증 성공 응답
+member -> db: 회원 정보 조회
+alt
+  group 최초 가입인 경우
+  member -> db: 회원 정보 저장
+end
+member -> emailAuth: 회원 번호 수정 요청
+emailAuth -> db: 인증 데이터에 회원 번호 수정
+user <-- emailAuth: 가입 성공 응답
+
+=== 로그인(via. 이메일) ==
+autonumber
+user -> member: 로그인 요청
+member -> emailAuth: 이메일 로그인 요청
+emailAuth -> db: 이메일 인증 조회
+alt
+  group 인증 데이터 없는 경우
+  emailAuth -> db: 실패 기록 저장
+  emailAuth --[#red]> user: 인증 없음 응답
+end
+emailAuth -> emailAuth: 인증 토큰 설정
+emailAuth --> member: 인증 성공 응답
+member -> db: 로그인 기록 저장
+user <-- member: 로그인 완료 응답
+
+=== 회원 가입(via. SNS) ==
+autonumber
+alt
+  group 인가 코드 획득
+  user -> snsAuth: 인가 코드 요청
+  snsAuth -> snsAuthServer: 인가 코드 요청
+  user <-- snsAuthServer: 인가 코드 응답
+end
+user -> member: 회원 가입 요청(+ 인가 코드)
+member -> snsAuth: SNS 인증 생성 요청
+alt
+  group SNS 인증 존재
+  snsAuth -> db: 실패 기록 저장
+  user <[#red]-- snsAuth: 중복 가입 응답
+end
+snsAuth -> db: SNS 인증 생성 + 기록 저장
+member <-- snsAuth: 성공 응답
+
+member -> db: 회원 정보 조회
+alt
+  group 최초 가입인 경우
+  member -> db: 회원 정보 저장
+end
+member -> snsAuth: 회원 번호 수정 요청
+snsAuth -> db: 인증 데이터에 회원 번호 수정
+user <-- snsAuth: 가입 성공 응답
+
+=== 로그인(via. SNS) ==
+autonumber
+user -> member: 로그인 요청
+member -> snsAuth: SNS 로그인 요청
+snsAuth -> db: SNS 인증 조회
+alt
+  group 인증 데이터 없는 경우
+  snsAuth -> db: 실패 기록 저장
+  user <[#red]-- snsAuth: 인증 없음 응답
+end
+snsAuth -> snsAuth: 인증 토큰 설정
+snsAuth -> db: 성공 기록 저장
+member <-- snsAuth: 인증 성공 응답
+member -> db: 로그인 기록 저장
+user <-- member: 로그인 완료 응답
+
+@enduml
