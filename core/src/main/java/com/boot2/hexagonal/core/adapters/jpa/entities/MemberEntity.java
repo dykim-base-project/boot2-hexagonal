@@ -2,16 +2,9 @@ package com.boot2.hexagonal.core.adapters.jpa.entities;
 
 import com.boot2.hexagonal.api.data.EmailAddress;
 import com.boot2.hexagonal.api.data.enums.MemberStatusKind;
+import com.boot2.hexagonal.api.data.ids.WorkerId;
 import java.time.ZonedDateTime;
-import javax.persistence.Column;
-import javax.persistence.Entity;
-import javax.persistence.EnumType;
-import javax.persistence.Enumerated;
-import javax.persistence.GeneratedValue;
-import javax.persistence.GenerationType;
-import javax.persistence.Id;
-import javax.persistence.Table;
-import javax.persistence.UniqueConstraint;
+import javax.persistence.*;
 import lombok.Data;
 import lombok.EqualsAndHashCode;
 import org.hibernate.annotations.Comment;
@@ -21,11 +14,7 @@ import org.hibernate.annotations.Comment;
 @Entity
 @Table(
     name = "member",
-    uniqueConstraints = {
-      @UniqueConstraint(
-          name = "uk__email_address",
-          columnNames = {"email_address"})
-    })
+    indexes = {@Index(name = "idx__sns_email_address", columnList = "sns_email_address")})
 @org.hibernate.annotations.Table(appliesTo = "member", comment = "회원")
 public class MemberEntity {
 
@@ -34,20 +23,13 @@ public class MemberEntity {
   @GeneratedValue(strategy = GenerationType.IDENTITY)
   private Long id;
 
-  @Comment("이름")
-  @Column(nullable = false, length = 20)
-  private String name;
-
-  @Comment("비밀번호")
-  @Column(nullable = false, length = 50)
-  private String password;
-
-  @Comment("이메일 주소")
-  @Column(name = "email_address", nullable = false, length = EmailAddress.MAX_LENGTH)
-  private String emailAddress;
-
-  @Comment("이메일 검증 여부")
-  private boolean emailValidated;
+  @Comment("SNS 이메일 주소")
+  @Column(
+      name = "sns_email_address",
+      nullable = false,
+      updatable = false,
+      length = EmailAddress.MAX_LENGTH)
+  private String snsEmailAddress;
 
   @Comment("상태")
   @Enumerated(EnumType.STRING)
@@ -58,7 +40,15 @@ public class MemberEntity {
   @Column(nullable = false, updatable = false, columnDefinition = "datetime(3)")
   private ZonedDateTime createdAt;
 
+  @Comment("생성자 Id")
+  @Column(nullable = false, updatable = false, length = WorkerId.MAX_LENGTH)
+  private String creatorId;
+
   @Comment("수정 일시")
   @Column(nullable = false, columnDefinition = "datetime(3)")
   private ZonedDateTime modifiedAt;
+
+  @Comment("수정자 Id")
+  @Column(nullable = false, length = WorkerId.MAX_LENGTH)
+  private String modifierId;
 }

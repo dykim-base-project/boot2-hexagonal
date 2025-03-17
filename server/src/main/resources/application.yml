@@ -4,7 +4,6 @@ spring:
     group:
       default: api-doc, core, embedded-redis
       local: api-doc, core
-    include: email
   h2:
     console:
       enabled: false

@@ -15,8 +15,8 @@ spring:
   jpa:
     database: mysql
     generate-ddl: true
-#    hibernate:
-#      ddl-auto: create-drop
+    hibernate:
+      ddl-auto: create-drop
   redis:
     host: localhost
     port: 16379
@@ -30,9 +30,3 @@ server:
     include-stacktrace: always
     include-exception: true
     include-binding-errors: always
-
-smtp:
-  host: smtp.naver.com
-  port: 465
-  username: idean3885
-  sender: ${smtp.username}@naver.com

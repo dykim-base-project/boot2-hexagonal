@@ -19,7 +19,7 @@ public record WorkerId(@NotBlank @Size(max = MAX_LENGTH) @JsonValue String value
   }
 
   public static WorkerId from(@NonNull MemberId memberId) {
-    return new WorkerId(memberId.stringValue());
+    return new WorkerId("M:" + memberId.stringValue());
   }
 
   public static WorkerId system() {

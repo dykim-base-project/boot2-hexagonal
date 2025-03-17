@@ -1,4 +1,4 @@
-package com.boot2.hexagonal.server.controllers.members;
+package com.boot2.hexagonal.server.controllers.user;
 
 import com.boot2.hexagonal.api.MemberUserUseCase;
 import com.boot2.hexagonal.api.commands.MemberUserCommand;

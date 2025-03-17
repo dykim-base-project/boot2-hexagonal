@@ -5,7 +5,6 @@ actor "사용자" as user
 
 package "회원" as member {
   usecase (생성) as memberCreate
-  usecase (수정) as memberModify
 }
 
 package "인증" as auth {
@@ -25,6 +24,5 @@ issueOAuthCode --> user: 인가 코드 응답
 user --> issueAuthToken
 issueAuthToken --> issueOAuthToken
 issueAuthToken --> memberCreate
-issueAuthToken -> memberModify
 
 @enduml

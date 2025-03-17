@@ -1,4 +1,5 @@
-package com.boot2.hexagonal.server.controllers.members
+package com.boot2.hexagonal.server.controllers.user
+
 
 import static org.springframework.test.web.servlet.request.MockMvcRequestBuilders.post
 import static org.springframework.test.web.servlet.result.MockMvcResultMatchers.content
@@ -34,7 +35,7 @@ class MemberUserControllerSpec extends Specification {
 
     def "create() 성공"() {
         given:
-        def commandRequest = MemberUserApiFixture.COMMAND_REQUEST_NORMAL
+        def commandRequest = MemberUserApiFixture.CREATE_REQUEST
         def responseData = MemberUserApiFixture.DATA_CREATED_NORMAL
         useCase.create(_ as MemberUserCommand.CreateRequest) >> responseData
 
