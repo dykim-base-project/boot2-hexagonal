@@ -35,7 +35,11 @@
 2. PR 생성
    * PR 생성 시 빌드 및 테스트 커버리지를 기록합니다. (GitHub Action pr-build-test-coverage-report.yml)
 3. PR 병합
-   * 병합 시, main 브랜치 기준 프로젝트 빌드 테스트를 진행합니다. (GitHub Action main-build.yml) 
+   * 병합 시, main 브랜치 기준 프로젝트 빌드 테스트를 진행합니다. (GitHub Action main-build.yml)
+
+#### 배포
+* k8s 환경을 기준으로 배포하고 관리합니다.
+![Infra UML](https://github.com/user-attachments/assets/11356526-1533-4ebb-9077-c8e98a077fb1)
 
 #### 기타
   * .flyway

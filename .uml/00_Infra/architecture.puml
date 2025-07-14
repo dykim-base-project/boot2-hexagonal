@@ -1,0 +1,34 @@
+@startuml
+'https://plantuml.com/use-case-diagram
+
+title Infra Architecture
+
+actor developer
+
+package harbor as harbor {
+  (imageRepository) as imageRepository
+  (chartRepository) as chartRepository
+}
+
+package argocd as argocd {
+  (application) as application
+}
+
+package GitHub as GitHub {
+  package githubAction as githubAction {
+    (code build) as codeBuild
+    (image create) as imageCreate
+    (chart create) as chartCreate
+  }
+}
+
+GitHub <- developer: code push
+GitHub -> githubAction: trigger
+codeBuild -> imageCreate
+imageCreate -> imageRepository: push image
+imageCreate -> chartCreate
+chartCreate --> chartRepository: push chart
+chartRepository <. application: chart pull
+imageRepository <. application: image pull
+
+@enduml
