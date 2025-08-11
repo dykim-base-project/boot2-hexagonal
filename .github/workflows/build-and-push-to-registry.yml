@@ -1,0 +1,63 @@
+name: Build & Push (main & feature)
+
+on:
+  push:
+    branches:
+      - "main"
+      - "feature/**"
+
+jobs:
+  build-and-push:
+    name: Build Gradle project, Dockerize, and push
+    runs-on: ubuntu-latest
+    permissions:
+      contents: read
+
+    env:
+      DOCKERHUB_REPO: dykimdocker/boot2-hexagonal-images
+      TZ: Asia/Seoul
+
+    steps:
+      - name: Checkout
+        uses: actions/checkout@v4
+
+      - name: Set up JDK 17
+        uses: actions/setup-java@v4
+        with:
+          java-version: '17'
+          distribution: 'temurin'
+
+      - name: Setup Gradle (cache)
+        uses: gradle/actions/setup-gradle@af1da67850ed9a4cedd57bfd976089dd991e2582 # v4.0.0
+
+      - name: Build with Gradle Wrapper
+        run: ./gradlew build
+
+      - name: Compute Docker tag
+        id: tag
+        shell: bash
+        run: |
+          BRANCH_REF="${GITHUB_REF_NAME}"
+          PREFIX="${BRANCH_REF%%/*}"
+          if [[ "$PREFIX" == "$BRANCH_REF" ]]; then PREFIX="$BRANCH_REF"; fi
+          PREFIX_SAFE=$(echo "$PREFIX" | tr -cd '[:alnum:]._-')
+          # Extract branch number if exists (e.g., feature/123 -> 123)
+          BRANCH_NUM=$(echo "$BRANCH_REF" | grep -oE '[0-9]+' | head -n1)
+          TAG="${PREFIX_SAFE}-${BRANCH_NUM}-${GITHUB_RUN_NUMBER}"
+          echo "TAG=${TAG}" >> $GITHUB_OUTPUT
+          echo "IMAGE=${DOCKERHUB_REPO}:${TAG}" >> $GITHUB_OUTPUT
+
+      - name: Set up Docker Buildx
+        uses: docker/setup-buildx-action@v3
+
+      - name: Build and Push image (.infra/image/Dockerfile)
+        uses: docker/build-push-action@v6
+        with:
+          context: .
+          file: ./.infra/image/Dockerfile
+          push: true
+          tags: ${{ steps.tag.outputs.IMAGE }}
+
+      - name: Print pushed tag
+        run: |
+          echo "Pushed: ${{ steps.tag.outputs.IMAGE }}"

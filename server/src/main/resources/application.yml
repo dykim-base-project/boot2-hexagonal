@@ -2,8 +2,9 @@ spring:
   profiles:
     active: default
     group:
-      default: api-doc, core, embedded-redis
-      local: api-doc, core
+      default: api-doc, embedded-redis
+      local: api-doc
+    include: core
   h2:
     console:
       enabled: false

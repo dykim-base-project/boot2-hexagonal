@@ -5,9 +5,8 @@ title Infra Architecture
 
 actor developer
 
-package harbor as harbor {
-  (imageRepository) as imageRepository
-  (chartRepository) as chartRepository
+package docker as docker {
+  (registry) as registry
 }
 
 package argocd as argocd {
@@ -25,10 +24,9 @@ package GitHub as GitHub {
 GitHub <- developer: code push
 GitHub -> githubAction: trigger
 codeBuild -> imageCreate
-imageCreate -> imageRepository: push image
+imageCreate -> registry: push image
 imageCreate -> chartCreate
-chartCreate --> chartRepository: push chart
-chartRepository <. application: chart pull
-imageRepository <. application: image pull
+chartCreate --> registry: push chart
+registry <. application: Chart & Image pull
 
 @enduml

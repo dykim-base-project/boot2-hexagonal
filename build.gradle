@@ -115,6 +115,27 @@ subprojects {
         finalizedBy 'jacocoTestReport'
     }
 
+    tasks.withType(Test).configureEach {
+        // 테스트 실행 중 매번 로그를 출력하도록
+        outputs.upToDateWhen { false }
+
+        testLogging {
+            // 모든 테스트 이벤트를 콘솔에 출력
+            events "started", "skipped", "passed"
+            events "failed", "standardOut", "standardError"
+
+            // 예외는 전체 스택트레이스로 출력
+            exceptionFormat = "full"
+
+            // System.out / System.err 전부 출력
+            showStandardStreams = true
+        }
+
+        // 테스트 병렬화로 인해 로그가 섞이지 않도록 필요 시 제한
+         maxParallelForks = 1
+    }
+
+
     jacocoTestReport {
         dependsOn test
 
